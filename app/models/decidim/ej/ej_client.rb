@@ -3,15 +3,7 @@
 module Decidim
   module Ej
     class EjClient < ApplicationRecord
-      include Decidim::Resourceable
       include Decidim::HasComponent
-      include Decidim::Traceable
-      include Decidim::Loggable
-      include Decidim::TranslatableResource
-
-      translatable_fields :host
-
-      component_manifest_name "ej_client"
 
       def self.log_presenter_class_for(_log)
         Decidim::Pages::AdminLog::PagePresenter
@@ -20,6 +12,12 @@ module Decidim
       # Public: Pages do not have title so we assign the component one to it.
       def title
         component.name
+      end
+
+      def self.create(component_instance)
+        @client = EjClient.new(component: component_instance, host: component_instance.settings.host,
+          conversation_id: component_instance.settings.conversation_id)
+        @client.save!
       end
     end
   end

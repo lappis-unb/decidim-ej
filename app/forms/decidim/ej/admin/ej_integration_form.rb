@@ -7,6 +7,7 @@ module Decidim
       class EjIntegrationForm < Decidim::Form
         include TranslatableAttributes
         translatable_attribute :host, String
+        translatable_attribute :conversation_id, Integer
       end
     end
   end

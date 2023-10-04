@@ -18,11 +18,17 @@ Decidim.register_component(:ej) do |component|
     resource.model_class_name = "Decidim::Ej::EjClient"
   end
 
+  component.on(:create) do |instance|
+    Decidim::Ej::EjClient.create(instance) do
+      on(:invalid) { raise "Cannot create client" }
+    end
+  end
+
   component.settings(:global) do |settings|
     # Add your global settings
     # Available types: :integer, :boolean
-    settings.attribute :host, type: :string, default: "", required: true, translated: false
-    settings.attribute :conversation_id, type: :integer, default: 0, required: true, translated: false
+    settings.attribute :host, type: :string, default: "", required: true
+    settings.attribute :conversation_id, type: :integer, default: 0, required: true
   end
 
   # component.settings(:step) do |settings|

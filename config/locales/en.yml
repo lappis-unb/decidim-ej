@@ -1,6 +1,12 @@
 ---
 en:
   decidim:
+    ej:
+      admin:
+        ej:
+          index:
+            title: "Opinion Component"
+            save: "save"
     components:
       ej:
         name: Ej

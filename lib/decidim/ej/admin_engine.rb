@@ -11,8 +11,9 @@ module Decidim
 
       routes do
         # Add admin engine routes here
-        resources :ej
+        post "/", to: "ej#update", as: :ej
         root to: "ej#index"
+        resources :ej
       end
 
       def load_seed
