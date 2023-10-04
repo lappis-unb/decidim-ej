@@ -1,0 +1,21 @@
+{
+  "name": "decidim-ej",
+  "version": "0.0.1",
+  "description": "A Decidim component that enables EJ integration.",
+  "private": true,
+  "license": "AGPL-3.0",
+  "scripts": {
+    "lint": "eslint -c .eslintrc.json --no-error-on-unmatched-pattern --ignore-pattern app/packs/vendor --ext .js app/packs",
+    "stylelint": "stylelint app/packs/**/*.scss"
+  },
+  "dependencies": {
+    "@decidim/browserslist-config": "^0.28.0-dev",
+    "@decidim/webpacker": "^0.28.0-dev"
+  },
+  "devDependencies": {
+    "@decidim/dev": "^0.28.0-dev",
+    "@decidim/eslint-config": "^0.28.0-dev",
+    "@decidim/stylelint-config": "^0.28.0-dev"
+  },
+  "browserslist": ["extends @decidim/browserslist-config"]
+}

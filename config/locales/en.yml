@@ -1,0 +1,10 @@
+---
+en:
+  decidim:
+    components:
+      ej:
+        name: Ej
+        settings:
+          global:
+            host: "Pushing Together URL host."
+            conversation_id: "EJ Conversation identifier."
