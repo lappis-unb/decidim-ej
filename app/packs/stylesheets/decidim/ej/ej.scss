@@ -1,1 +1,7 @@
 /* css for decidim_ej */
+
+$base-color: rgba(48, 191, 211, 0.15);
+
+.conversation-card {
+  background-color: $base-color;
+}
