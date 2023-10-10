@@ -32,6 +32,10 @@ module Decidim
         return "#{@host}#{@routes[:conversations]}#{@conversation_id}"
       end
 
+      def comment_route(*args)
+        return "#{@host}#{@routes[:conversations]}#{@conversation_id}/random-comment"
+      end
+
       def decidim_user_name
         "decidim-#{@user.name}"
       end
@@ -70,18 +74,30 @@ module Decidim
         end
       end
 
+    def get_next_comment
+        response = self.class.get(self.comment_route, headers: {'Authorization': "Token #{@token}"})
+        if response.code == 200
+          return JSON.parse response.body
+        else
+          raise "comment could not be retrieved"
+        end
+    end
+
       def create_user
         response = self.class.post(self.new_user_route, body: JSON.generate(self.new_user_data), headers: { 'Content-Type' => 'application/json' })
         if response.code == 400
           raise "user exists"
         end
-        @token = response[:token]
+        body = JSON.parse response.body
+        @token = body["token"]
       end
 
       def authenticate
         response = self.class.post(self.login_route, body: JSON.generate(self.user_data), headers: { 'Content-Type' => 'application/json' })
+        debugger
         if response.code == 200
-          @token = response[:token]
+          body = JSON.parse response.body
+          @token = body["token"]
         else
           raise "error"
         end

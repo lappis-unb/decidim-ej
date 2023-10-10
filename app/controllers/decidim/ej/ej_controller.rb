@@ -10,6 +10,7 @@ module Decidim
           client_api.authenticate
         end
         @conversation = client_api.get_conversation()
+        @comment = client_api.get_next_comment()
       end
     end
   end
