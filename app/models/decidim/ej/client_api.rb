@@ -16,24 +16,29 @@ module Decidim
         @routes = {
           "users": "/api/v1/users/",
           "login": "/api/v1/login/",
-          "conversations": "/api/v1/conversations/"
+          "conversations": "/api/v1/conversations/",
+          "votes": "/api/v1/votes/"
         }
       end
 
       def login_route
-        return "#{@host}#{@routes[:login]}"
+        "#{@host}#{@routes[:login]}"
       end
 
       def new_user_route
-        return "#{@host}#{@routes[:users]}"
+        "#{@host}#{@routes[:users]}"
       end
 
       def conversation_route
-        return "#{@host}#{@routes[:conversations]}#{@conversation_id}"
+        "#{@host}#{@routes[:conversations]}#{@conversation_id}"
       end
 
       def comment_route(*args)
-        return "#{@host}#{@routes[:conversations]}#{@conversation_id}/random-comment"
+        "#{@host}#{@routes[:conversations]}#{@conversation_id}/random-comment"
+      end
+
+      def vote_route
+        "#{@host}#{@routes[:votes]}"
       end
 
       def decidim_user_name
@@ -78,17 +83,23 @@ module Decidim
         {'Authorization': "Token #{@token}"}
       end
 
-      def vote(option)
+      def vote(choice, comment_id)
+        votes_options = {"agree": 1, "disagree": -1, "skip": 0}
+        data = {"choice": votes_options[choice.to_sym], "comment": comment_id, "channel": "opinion_component"}
+        response = self.class.post(self.vote_route, body: data, headers: self.headers)
+        if not [200, 201].include? response.code
+          raise "vote could not be saved: #{response.parsed_response}"
+        end
       end
 
-    def get_next_comment
-        response = self.class.get(self.comment_route, headers: self.headers)
-        if response.code == 200
-          return JSON.parse response.body
-        else
-          raise "comment could not be retrieved"
-        end
-    end
+      def get_next_comment
+          response = self.class.get(self.comment_route, headers: self.headers)
+          if response.code == 200
+            return JSON.parse response.body
+          else
+            raise "comment could not be retrieved"
+          end
+      end
 
       def create_user
         response = self.class.post(self.new_user_route, body: JSON.generate(self.new_user_data), headers: { 'Content-Type' => 'application/json' })
@@ -108,9 +119,6 @@ module Decidim
           raise "error"
         end
       end
-
-      private
-
     end
   end
 end
