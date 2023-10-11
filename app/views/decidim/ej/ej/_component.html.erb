@@ -1,0 +1,58 @@
+<%= stylesheet_pack_tag "decidim_ej", media: "all" %>
+
+<div id="ej-conversation-grid" class="ej-conversation-grid">
+  <div class="ej-conversation-card">
+      <div class="ej-conversation-card__stats">
+        <div>
+          <svg width="27" height="20" viewBox="0 0 27 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M19.0714 7.14286C19.0714 3.19643 14.9152 0 9.78572 0C4.65625 0 0.5 3.19643 0.5 7.14286C0.5 8.67411 1.12946 10.0848 2.19643 11.25C1.59821 12.5982 0.611607 13.6696 0.598214 13.683C0.5 13.7857 0.473214 13.9375 0.53125 14.0714C0.589286 14.2054 0.714286 14.2857 0.857143 14.2857C2.49107 14.2857 3.84375 13.7366 4.81696 13.1696C6.25446 13.8705 7.95536 14.2857 9.78572 14.2857C14.9152 14.2857 19.0714 11.0893 19.0714 7.14286ZM24.5179 16.9643C25.5848 15.8036 26.2143 14.3884 26.2143 12.8571C26.2143 9.87054 23.8259 7.3125 20.442 6.24554C20.4821 6.54018 20.5 6.83929 20.5 7.14286C20.5 11.8705 15.692 15.7143 9.78572 15.7143C9.30357 15.7143 8.83482 15.6786 8.37054 15.6295C9.77679 18.1964 13.0804 20 16.9286 20C18.7589 20 20.4598 19.5893 21.8973 18.8839C22.8705 19.4509 24.2232 20 25.8571 20C26 20 26.1295 19.9152 26.183 19.7857C26.2411 19.6563 26.2143 19.5045 26.1161 19.3973C26.1027 19.3839 25.1161 18.317 24.5179 16.9643Z" fill="#777777"/>
+          </svg>
+          <%= @conversation['statistics']['comments']['approved'] %>
+        </div>
+        <div>
+          <svg width="30" height="20" viewBox="0 0 30 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M27.6429 12.8571H24.7857V15.7143H25.7857C26.0223 15.7143 26.2143 15.875 26.2143 16.0714V16.7857C26.2143 16.9821 26.0223 17.1429 25.7857 17.1429H3.78571C3.54911 17.1429 3.35714 16.9821 3.35714 16.7857V16.0714C3.35714 15.875 3.54911 15.7143 3.78571 15.7143H4.78571V12.8571H1.92857C1.13839 12.8571 0.5 13.4955 0.5 14.2857V18.5714C0.5 19.3616 1.13839 20 1.92857 20H27.6429C28.433 20 29.0714 19.3616 29.0714 18.5714V14.2857C29.0714 13.4955 28.433 12.8571 27.6429 12.8571ZM23.3571 15.7143V1.44196C23.3571 0.642857 22.7098 0 21.9152 0H7.66071C6.86161 0 6.21429 0.647322 6.21429 1.44196V15.7143H23.3571ZM9.92857 7.58929L11.067 6.45982C11.2545 6.27232 11.558 6.27232 11.7455 6.46429L13.5893 8.32143L17.8393 4.10714C18.0268 3.91964 18.3304 3.91964 18.5179 4.11161L19.6473 5.25C19.8348 5.4375 19.8348 5.74107 19.6429 5.92857L13.9152 11.6071C13.7277 11.7946 13.4241 11.7946 13.2366 11.6027L9.92857 8.26786C9.73661 8.08036 9.74107 7.77679 9.92857 7.58929Z" fill="#777777"/>
+          </svg>
+          <%= @conversation['statistics']['votes']['total'] %>
+        </div>
+      </div>
+      <div class="ej-conversation-card__title">
+        <div>
+          <span>CONVERSA</span>
+        </div>
+        <div>
+          <span><%= @conversation['text'] %></span>
+        </div>
+      </div>
+      <div class="ej-conversation-card__comments"></div>
+      <div class="ej-conversation-card__comment">
+        <div><span>comentário</span></div>
+        <div id="comment-content">
+          <p>
+            <%= @comment['content'] %>
+          </p>
+        </div>
+      </div>
+      <div class="ej-conversation-card__votes">
+        <button onclick="saveVote('agree', <%=  @comment['links']['self'].split('/')[-1]%>)" id="agree">concordo</button>
+          <button onclick="saveVote('disagree', <%=  @comment['links']['self'].split('/')[-1]%>)" id="disagree">discordo</button>
+          <button onclick="saveVote('skip', <%=  @comment['links']['self'].split('/')[-1]%>)" id="skip">pular</button>
+      </div>
+  </div>
+</div>
+
+<script>
+const saveVote = (choice, comment_id) => {
+  $.ajax({
+    method: "POST",
+    url: '<%= voting_path %>',
+    data: {"choice": choice, "comment_id": comment_id},
+    success: function(response) {
+      console.log("Deu bom");
+      console.log(response);
+      $("#ej-conversation-grid").replaceWith(response);
+    }
+  });
+
+}
+</script>

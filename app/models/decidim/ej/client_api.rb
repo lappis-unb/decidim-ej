@@ -7,7 +7,7 @@ module Decidim
     class ClientApi
       include HTTParty
 
-      attr_reader :new_user_route, :new_user_data, :token, :decidim_user_name, :decidim_user_email, :decidim_password, :user_data, :conversation_route, :conversation
+      attr_reader :new_user_route, :new_user_data, :token, :decidim_user_name, :decidim_user_email, :decidim_password, :user_data, :conversation_route, :conversation, :headers
 
       def initialize(user, component)
         @user = user
@@ -74,8 +74,15 @@ module Decidim
         end
       end
 
+      def headers
+        {'Authorization': "Token #{@token}"}
+      end
+
+      def vote(option)
+      end
+
     def get_next_comment
-        response = self.class.get(self.comment_route, headers: {'Authorization': "Token #{@token}"})
+        response = self.class.get(self.comment_route, headers: self.headers)
         if response.code == 200
           return JSON.parse response.body
         else
@@ -94,7 +101,6 @@ module Decidim
 
       def authenticate
         response = self.class.post(self.login_route, body: JSON.generate(self.user_data), headers: { 'Content-Type' => 'application/json' })
-        debugger
         if response.code == 200
           body = JSON.parse response.body
           @token = body["token"]
