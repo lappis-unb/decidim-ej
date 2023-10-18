@@ -95,7 +95,10 @@ module Decidim
       def get_next_comment
           response = self.class.get(self.comment_route, headers: self.headers)
           if response.code == 200
-            return JSON.parse response.body
+            body = JSON.parse response.body
+            if body["content"] == ""
+              return {"content"=>"You have voted on all comments. Thank you for the participation.", "status"=>nil, "rejection_reason"=>nil, "rejection_reason_text"=>""}
+            end
           else
             raise "comment could not be retrieved"
           end

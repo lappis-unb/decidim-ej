@@ -33,11 +33,13 @@
           </p>
         </div>
       </div>
-      <div class="ej-conversation-card__votes">
-        <button onclick="saveVote('agree', <%=  @comment['links']['self'].split('/')[-1]%>)" id="agree">concordo</button>
-          <button onclick="saveVote('disagree', <%=  @comment['links']['self'].split('/')[-1]%>)" id="disagree">discordo</button>
-          <button onclick="saveVote('skip', <%=  @comment['links']['self'].split('/')[-1]%>)" id="skip">pular</button>
-      </div>
+      <% if @comment['content'] != "You have voted on all comments. Thank you for the participation." %>
+        <div class="ej-conversation-card__votes">
+          <button onclick="saveVote('agree', <%=  @comment['links']['self'].split('/')[-1]%>)" id="agree">concordo</button>
+            <button onclick="saveVote('disagree', <%=  @comment['links']['self'].split('/')[-1]%>)" id="disagree">discordo</button>
+            <button onclick="saveVote('skip', <%=  @comment['links']['self'].split('/')[-1]%>)" id="skip">pular</button>
+        </div>
+      <% end %>
   </div>
 </div>
 
