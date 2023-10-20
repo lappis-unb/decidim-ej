@@ -1,7 +1,7 @@
 <%= stylesheet_pack_tag "decidim_ej", media: "all" %>
 
 <div id="ej-conversation-grid" class="ej-conversation-grid">
-  <div class="ej-conversation-card">
+  <div class="ej-conversation-card card__grid">
       <div class="ej-conversation-card__stats">
         <div>
           <svg width="27" height="20" viewBox="0 0 27 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -18,7 +18,7 @@
       </div>
       <div class="ej-conversation-card__title">
         <div>
-          <span>CONVERSA</span>
+          <span>CONVERSATION</span>
         </div>
         <div>
           <span><%= @conversation['text'] %></span>
@@ -26,7 +26,7 @@
       </div>
       <div class="ej-conversation-card__comments"></div>
       <div class="ej-conversation-card__comment">
-        <div><span>comentário</span></div>
+        <div><span>COMMENT</span></div>
         <div id="comment-content">
           <p>
             <%= @comment['content'] %>
@@ -35,9 +35,18 @@
       </div>
       <% if @comment['content'] != "You have voted on all comments. Thank you for the participation." %>
         <div class="ej-conversation-card__votes">
-          <button onclick="saveVote('agree', <%=  @comment['links']['self'].split('/')[-1]%>)" id="agree">concordo</button>
-            <button onclick="saveVote('disagree', <%=  @comment['links']['self'].split('/')[-1]%>)" id="disagree">discordo</button>
-            <button onclick="saveVote('skip', <%=  @comment['links']['self'].split('/')[-1]%>)" id="skip">pular</button>
+          <button onclick="saveVote('agree', <%=  @comment['links']['self'].split('/')[-1]%>)" id="agree">
+            <span id="agree-text">concordo</span>
+            <span id="agree-loader" class="loader"></span>
+          </button>
+          <button onclick="saveVote('disagree', <%=  @comment['links']['self'].split('/')[-1]%>)" id="disagree">
+            <span id="disagree-text">discordo</span>
+            <span id="disagree-loader" class="loader"></span>
+          </button>
+          <button onclick="saveVote('skip', <%=  @comment['links']['self'].split('/')[-1]%>)" id="skip">
+            <span id="skip-text">pular</span>
+            <span id="skip-loader" class="loader"></span>
+          </button>
         </div>
       <% end %>
   </div>
@@ -49,9 +58,14 @@ const saveVote = (choice, comment_id) => {
     method: "POST",
     url: '<%= voting_path %>',
     data: {"choice": choice, "comment_id": comment_id},
+
+    beforeSend: function() {
+      $(`#${choice}-text`).hide();
+      $(`#${choice}-loader`).css("display", "block");
+    },
     success: function(response) {
-      console.log("Deu bom");
-      console.log(response);
+      $(`#${choice}-text`).show();
+      $(`#${choice}-loader`).hide();
       $("#ej-conversation-grid").replaceWith(response);
     }
   });

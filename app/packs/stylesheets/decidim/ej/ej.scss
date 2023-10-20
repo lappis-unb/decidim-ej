@@ -1,5 +1,9 @@
 /* css for decidim_ej */
 
+body > * {
+  font-family: Source Sans Pro, ui-sans-serif, system-ui, sans-serif;
+}
+
 $base-color: rgba(48, 191, 211, 0.15);
 $gray-color: #777;
 $white-color: white;
@@ -9,14 +13,15 @@ $black-color: #000;
 
 .ej-conversation-grid {
   display: grid;
-  grid-template-columns: 10% auto 10%;
-  grid-template-rows: 15% auto 15%;
+  grid-template-columns: 20% auto 20%;
+  grid-template-rows: calc(266px / 2) auto calc(266px / 2);
 }
 .ej-conversation-card {
-  background-color: $base-color;
+  background-color: $white-color;
   grid-column: 2;
   grid-row: 2;
   max-width: 54rem;
+  margin: auto;
   width: 100%;
   height: 100%;
   padding: 2.87rem 2.59rem 2.44rem 3rem;
@@ -76,5 +81,42 @@ $black-color: #000;
     button[id='skip'] {
       border: 1px solid $black-color;
     }
+  }
+}
+.card__grid:hover {
+  --tw-ring-color: unset !important;
+}
+
+.loader {
+    width: 25px;
+    height: 25px;
+    border: 5px solid #FFF;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+    display: none;
+}
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@media (max-width: 900px) {
+  .ej-conversation-grid {
+    grid-template-columns: auto;
+    grid-template-rows: 10px auto 10px;
+  }
+  .ej-conversation-card {
+    grid-column: 1;
+    width: unset;
+    height: unset;
+    padding: 1.5rem 1.5rem;
+    box-sizing: content-box;
   }
 }
