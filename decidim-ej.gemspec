@@ -6,8 +6,8 @@ require "decidim/ej/version"
 
 Gem::Specification.new do |s|
   s.version = Decidim::Ej.version
-  s.authors = [""]
-  s.email = [""]
+  s.authors = ["David Carlos de Araújo Silva"]
+  s.email = ["ddavidcarlos1392@gmail.com"]
   s.license = "AGPL-3.0"
   s.homepage = "https://decidim.org"
   s.metadata = {
@@ -20,8 +20,8 @@ Gem::Specification.new do |s|
   s.required_ruby_version = ">= 3.0.7"
 
   s.name = "decidim-ej"
-  s.summary = "A decidim ej module"
-  s.description = "A Decidim component that enables EJ integration.."
+  s.summary = "Pushing Together integration module."
+  s.description = "Extends Decidim adding Pushing Together opinion research capabilities."
 
   s.files = Dir["{app,config,lib}/**/*", "LICENSE-AGPLv3.txt", "Rakefile", "README.md"]
 
