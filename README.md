@@ -1,36 +1,51 @@
-# Decidim::Ej
+EJ component extends Decidim's capabilities to allow it to collect users opinions. After
+enabling and configuring the component, a participation page will be available. 
+The voting system is composed of a subject, a list of comments about the subject and 
+three vote options. The votes are send to EJ using its API.
 
-A Decidim component that enables EJ integration..
-
-## Usage
-
-Ej will be available as a Component for a Participatory
-Space.
-
-## Installation
+# Installation
 
 Add this line to your application's Gemfile:
-
 ```ruby
 gem "decidim-ej"
 ```
 
 And then execute:
-
 ```bash
 bundle
 ```
 
-## Contributing
+For local development, you can refer to [this repository](https://gitlab.com/pencillabs/brasilparticipativo/decidim-ej-site).
 
-Contributions are welcome !
+# Usage
 
-We expect the contributions to follow the [Decidim's contribution guide](https://github.com/decidim/decidim/blob/develop/CONTRIBUTING.adoc).
+1. Creates an EJ conversation.
 
-## Security
+[new conversation button](./docs/create-conversation-button.png)
 
-Security is very important to us. If you have any issue regarding security, please disclose the information responsibly by sending an email to __ddavidcarlos1392 [at] gmail [dot] com__ and not by creating a Github issue.
+2. Retrieves the conversation ID from URL. Keep this information.
 
-## License
+[conversation id](./docs/get-conversation-id.png)
 
-This engine is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
+3. Edit some Decidim participatory space and click on 'Components'.
+
+[partipatory space components](./docs/decidim-components.png)
+
+4. Click on 'add components' and then click on EJ component.
+
+[installing EJ component](./docs/add-ej-component.png)
+
+5. Configure EJ component to request the conversation created on step 1.
+
+- The host URL is the http/https EJ URL. This can be a local or remote EJ instance.
+- The conversation identifier is the ID from step 2.
+
+Now, you can save the component and it will appear on participatory space components list.
+
+[configuring EJ](./docs/configuring-ej-component.png)
+
+6. On components list, click on EJ component name. Decidim will load the participation page
+for the configured conversation.
+
+[using EJ](./docs/ej-participation-page.png)
+
