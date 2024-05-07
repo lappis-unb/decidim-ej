@@ -14,8 +14,8 @@ And then execute:
 ```bash
 bundle
 ```
-
 For local development, you can refer to [this repository](https://gitlab.com/pencillabs/brasilparticipativo/decidim-ej-site).
+This component depends on a running [EJ instance](https://gitlab.com/pencillabs/ej/ej-application).
 
 # Usage
 
