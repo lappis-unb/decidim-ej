@@ -21,19 +21,19 @@ For local development, you can refer to [this repository](https://gitlab.com/pen
 
 1. Creates an EJ conversation.
 
-[new conversation button](./docs/create-conversation-button.png)
+![new conversation button](./docs/create-conversation-button.png)
 
 2. Retrieves the conversation ID from URL. Keep this information.
 
-[conversation id](./docs/get-conversation-id.png)
+![conversation id](./docs/get-conversation-id.png)
 
 3. Edit some Decidim participatory space and click on 'Components'.
 
-[partipatory space components](./docs/decidim-components.png)
+![partipatory space components](./docs/decidim-components.png)
 
 4. Click on 'add components' and then click on EJ component.
 
-[installing EJ component](./docs/add-ej-component.png)
+![installing EJ component](./docs/add-ej-component.png)
 
 5. Configure EJ component to request the conversation created on step 1.
 
@@ -42,10 +42,10 @@ For local development, you can refer to [this repository](https://gitlab.com/pen
 
 Now, you can save the component and it will appear on participatory space components list.
 
-[configuring EJ](./docs/configuring-ej-component.png)
+![configuring EJ](./docs/configuring-ej-component.png)
 
 6. On components list, click on EJ component name. Decidim will load the participation page
 for the configured conversation.
 
-[using EJ](./docs/ej-participation-page.png)
+![using EJ](./docs/ej-participation-page.png)
 
