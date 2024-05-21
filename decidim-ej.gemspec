@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
     "homepage_uri" => "https://decidim.org",
     "source_code_uri" => "https://github.com/decidim/decidim"
   }
-  s.required_ruby_version = ">= 3.0.7"
+  s.required_ruby_version = ">= 3.0.4"
 
   s.name = "decidim-ej"
   s.summary = "Pushing Together integration module."
