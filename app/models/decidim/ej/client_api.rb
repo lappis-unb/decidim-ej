@@ -119,7 +119,7 @@ module Decidim
         raise RequestError, "comment could not be retrieved" unless response.code == 200
 
         body = JSON.parse response.body
-        body = { "content" => "You have voted on all comments. Thank you for the participation." } unless body["content"]
+        body = { "content" => "You have voted on all comments. Thank you for the participation." } unless body["content"].present?
 
         body
       end
