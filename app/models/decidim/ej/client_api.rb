@@ -46,11 +46,13 @@ module Decidim
       private
 
       def cached_token
+        # Read the token from the cache
         Rails.cache.read(user_token_cache_identifier)
       end
 
       def headers
-        { 'Authorization' => "Token #{cached_token}" }
+        # Set the authorization header with the cached token
+        { 'Authorization' => "Bearer #{cached_token}" }
       end
 
       def fire_action_request(action, *args, attempt: 1)
@@ -58,7 +60,8 @@ module Decidim
           Rails.logger.error "Authentication failed twice in EJ action #{action} for user #{@user.name}."
           raise Decidim::Ej::RequestError
         end
-
+        
+        # Authenticate the user
         authenticate
 
         begin
@@ -70,6 +73,7 @@ module Decidim
       end
 
       def authenticate
+        # Create user if the user does not have an EJ account
         return create_user unless @user.has_ej_account?
         return cached_token if cached_token.present?
 
@@ -87,15 +91,18 @@ module Decidim
         body = JSON.parse response.body
 
         # TODO: Receive expiration time in the response and properly set here
-        set_cached_token(body["token"])
+        set_cached_token(body["access_token"])
       end
 
       def vote(choice, comment_id)
+        # Prepare the request body with the vote choice and comment ID
         request_body = {
           choice: VOTE_OPTIONS[choice.to_sym],
           comment: comment_id, channel:
           "opinion_component"
         }
+
+         # Make a POST request to the vote endpoint
         response = self.class.post(vote_route, body: request_body, headers: headers)
 
         raise Unauthorized if response.code == 401
@@ -105,6 +112,7 @@ module Decidim
       end
 
       def conversation
+        # Make a GET request to the conversation endpoint
         response = self.class.get(conversation_route)
 
         raise RequestError unless response.code == 200
@@ -113,6 +121,7 @@ module Decidim
       end
 
       def next_comment
+        # Make a GET request to fetch the next comment
         response = self.class.get(comment_route, headers: headers)
 
         raise Unauthorized if response.code == 401
@@ -134,16 +143,19 @@ module Decidim
       end
 
       def user_token_cache_identifier
+        # Generate a unique cache key for the user's token
         "ej/users/#{@user.id}/token"
       end
 
       def create_user
+        # Make a POST request to create a new user
         response = self.class.post(
           new_user_route,
           body: JSON.generate(new_user_data),
           headers: { 'Content-Type' => 'application/json' }
         )
-
+        
+        # Update the user's EJ account status
         @user.update_column(:has_ej_account, true)
 
         raise Decidim::Ej::RequestError unless response.code == 200
@@ -151,10 +163,11 @@ module Decidim
         body = JSON.parse response.body
 
         # TODO: Receive expiration time in the response and properly set here
-        set_cached_token(body["token"])
+        set_cached_token(body["access_token"])
       end
 
       def new_user_data
+        # Prepare the data for creating a new user
         {
           name: decidim_user_name,
           email: decidim_user_email,
@@ -164,6 +177,7 @@ module Decidim
       end
 
       def user_data
+        # Prepare the login data
         {
           email: decidim_user_email,
           password: decidim_password
