@@ -60,7 +60,7 @@ module Decidim
           Rails.logger.error "Authentication failed twice in EJ action #{action} for user #{@user.name}."
           raise Decidim::Ej::RequestError
         end
-        
+
         # Authenticate the user
         authenticate
 
@@ -149,30 +149,34 @@ module Decidim
 
       def create_user
         # Make a POST request to create a new user
+        user_data = JSON.generate(new_user_data)
+
         response = self.class.post(
           new_user_route,
-          body: JSON.generate(new_user_data),
+          body: user_data,
           headers: { 'Content-Type' => 'application/json' }
         )
-        
-        # Update the user's EJ account status
-        @user.update_column(:has_ej_account, true)
+
+        @user.has_ej_account = true
+        @user.ej_password = user_data[:password]
+
+        @user.save!
 
         raise Decidim::Ej::RequestError unless response.code == 200
 
         body = JSON.parse response.body
 
-        # TODO: Receive expiration time in the response and properly set here
-        set_cached_token(body["access_token"])
+        set_cached_token(body["access_token"], expiration: 300)
       end
 
       def new_user_data
         # Prepare the data for creating a new user
+        random_password = SecureRandom.hex(10)
         {
           name: decidim_user_name,
           email: decidim_user_email,
-          password: decidim_password,
-          password_confirm: decidim_password
+          password: random_password,
+          password_confirm: random_password
         }
       end
 
@@ -213,7 +217,7 @@ module Decidim
       end
 
       def decidim_password
-        "decidim-#{@user.name}-#{@user.email}"
+        @user.ej_password
       end
     end
   end

@@ -15,8 +15,12 @@ module Decidim
       end
 
       def self.create(component_instance)
-        @client = EjClient.new(component: component_instance, host: component_instance.settings.host,
-          conversation_id: component_instance.settings.conversation_id)
+        @client = EjClient.new(
+          component: component_instance,
+          host: component_instance.settings.host,
+          conversation_id: component_instance.settings.conversation_id
+        )
+
         @client.save!
       end
     end

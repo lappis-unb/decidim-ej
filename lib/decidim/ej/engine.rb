@@ -19,6 +19,12 @@ module Decidim
       initializer "Ej.webpacker.assets_path" do
         Decidim.register_assets_path File.expand_path("app/packs", root)
       end
+
+      initializer "decidim_ej.registration_additions" do
+        Decidim::User.class_eval do
+          include Decidim::Ej::HasCredentials
+        end
+      end
     end
   end
 end
