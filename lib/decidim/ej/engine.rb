@@ -13,7 +13,11 @@ module Decidim
         # Add engine routes here
         post "vote", to: "ej#vote", as: :voting
         root to: "ej#index"
-        resources :ej
+        resources :ej do
+          member do
+            post :post_comment
+          end
+        end
       end
 
       initializer "Ej.webpacker.assets_path" do

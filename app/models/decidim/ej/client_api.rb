@@ -27,7 +27,8 @@ module Decidim
           users: "/api/v1/users/",
           login: "/api/v1/login/",
           conversations: "/api/v1/conversations/",
-          votes: "/api/v1/votes/"
+          votes: "/api/v1/votes/",
+          comments: "/api/v1/comments/"
         }
       end
 
@@ -43,6 +44,10 @@ module Decidim
         fire_action_request(:next_comment)
       end
 
+      def post_comment(content)
+        fire_action_request(:comment, content)
+      end
+
       private
 
       def cached_token
@@ -52,7 +57,9 @@ module Decidim
 
       def headers
         # Set the authorization header with the cached token
-        { 'Authorization' => "Bearer #{cached_token}" }
+        {
+          Authorization: "Bearer #{cached_token}"
+        }
       end
 
       def fire_action_request(action, *args, attempt: 1)
@@ -60,7 +67,7 @@ module Decidim
           Rails.logger.error "Authentication failed twice in EJ action #{action} for user #{@user.name}."
           raise Decidim::Ej::RequestError
         end
-        
+
         # Authenticate the user
         authenticate
 
@@ -102,7 +109,7 @@ module Decidim
           "opinion_component"
         }
 
-         # Make a POST request to the vote endpoint
+        # Make a POST request to the vote endpoint
         response = self.class.post(vote_route, body: request_body, headers: headers)
 
         raise Unauthorized if response.code == 401
@@ -117,12 +124,12 @@ module Decidim
 
         raise RequestError unless response.code == 200
 
-        JSON.parse response.body
+        JSON.parse(response.body)
       end
 
       def next_comment
         # Make a GET request to fetch the next comment
-        response = self.class.get(comment_route, headers: headers)
+        response = self.class.get(random_comment_route, headers: headers)
 
         raise Unauthorized if response.code == 401
         raise RequestError, "comment could not be retrieved" unless response.code == 200
@@ -131,6 +138,27 @@ module Decidim
         body = { "content" => "You have voted on all comments. Thank you for the participation." } unless body["content"].present?
 
         body
+      end
+
+      def comment(content)
+        body = {
+          content: content,
+          conversation: @conversation_id,
+          status: :pending
+        }.to_json
+
+        headers = self.headers.merge({ 'Content-Type': 'application/json' })
+
+        response = self.class.post(
+          comment_route,
+          headers: headers,
+          body: body
+        )
+
+        raise Unauthorized if response.code == 401
+        raise RequestError unless response.code.in? [200, 201]
+
+        JSON.parse(response.body)
       end
 
       def set_cached_token(value, expiration: nil)
@@ -154,7 +182,7 @@ module Decidim
           body: JSON.generate(new_user_data),
           headers: { 'Content-Type' => 'application/json' }
         )
-        
+
         # Update the user's EJ account status
         @user.update_column(:has_ej_account, true)
 
@@ -196,12 +224,16 @@ module Decidim
         "#{@host}#{@routes[:conversations]}#{@conversation_id}"
       end
 
-      def comment_route
+      def random_comment_route
         "#{@host}#{@routes[:conversations]}#{@conversation_id}/random-comment"
       end
 
       def vote_route
         "#{@host}#{@routes[:votes]}"
+      end
+
+      def comment_route
+        "#{@host}#{@routes[:comments]}"
       end
 
       def decidim_user_name

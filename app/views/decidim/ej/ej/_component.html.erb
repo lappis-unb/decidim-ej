@@ -10,10 +10,19 @@
     </p>
   </div>
 
-  <button class="br-button secondary black-and-white-btn">
+  <button class="br-button secondary black-and-white-btn" onclick="toggleCommentForm()">
     <i class="fa fa-plus"></i>
     <span>Adicionar comentário à enquete</span>
   </button>
+
+  <div class="ej-conversation-container" id="comment-div-form" style="display: none;">
+    <%= form_with url: post_comment_ej_path(current_component.id), method: :post, local: true do |form| %>
+      <div class="bp-text-area">
+        <%= form.text_field :body, label: "Comentário", lines: 5 %>
+      </div>
+      <%= form.submit "Enviar comentário" %>
+    <% end %>
+  </div>
 
   <div class="ej-conversation-container">
     <div class="ej-conversation-card">
@@ -92,5 +101,9 @@ const saveVote = (choice, comment_id) => {
     }
   });
 
+}
+
+const toggleCommentForm = () => {
+  $("#comment-div-form").toggle(200);
 }
 </script>
