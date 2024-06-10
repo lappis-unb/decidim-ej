@@ -9,10 +9,14 @@ module Decidim
 
         def update
           form = form(EjIntegrationForm).from_params(params)
-          host = form.host["en"]
-          conversation_id = form.conversation_id["en"]
-          component = Decidim::Component.find(params[:component_id])
-          EjClient.find_by(component: component).update(host: host, conversation_id: conversation_id)
+
+          current_component.settings = { host: form.host, conversation_id: form.conversation_id }.with_indifferent_access
+          current_component.save!
+
+          EjClient.find_by(component: current_component).update(host: form.host, conversation_id: form.conversation_id)
+
+          flash[:notice] = :ok
+          redirect_to ej_index_url
         end
 
         def edit
