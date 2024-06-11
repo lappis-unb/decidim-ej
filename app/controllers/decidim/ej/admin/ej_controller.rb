@@ -2,9 +2,11 @@ module Decidim
   module Ej
     module Admin
       class EjController < Admin::ApplicationController
+        helper_method :collection
+
         def index
-          ej_client = EjClient.find_by(component: current_component)
-          @form = form(EjIntegrationForm).from_model(ej_client)
+          # ej_client = EjClient.find_by(component: current_component)
+          # @form = form(EjIntegrationForm).from_model(ej_client)
         end
 
         def update
@@ -22,6 +24,10 @@ module Decidim
         def edit
           ej_client = self.integration()
           @form = form(Admin::EjIntegrationForm).from_model(ej_client)
+        end
+
+        def collection
+          EjClient.where(component: current_component)
         end
       end
     end
