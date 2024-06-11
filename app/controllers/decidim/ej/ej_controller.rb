@@ -3,6 +3,8 @@ module Decidim
     class EjController < Decidim::Ej::ApplicationController
       before_action :set_conversation, :set_comment
 
+      helper_method :collection
+
       def index; end
 
       def vote
@@ -19,6 +21,10 @@ module Decidim
       end
 
       private
+
+      def collection
+        @collection ||= client_api.fetch_conversations
+      end
 
       def set_conversation
         @conversation = client_api.fetch_conversation

@@ -27,4 +27,8 @@
     </div>
   </div>
 <% end %>
-<%= render "decidim/ej/ej/component" %>
+
+<% collection.each do |conversation| %>
+  <% @conversation = conversation %>
+  <%= render "decidim/ej/ej/component" %>
+<% end %>
