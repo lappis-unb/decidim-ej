@@ -1,9 +1,17 @@
 module Decidim
   module Ej
     class EjController < Decidim::Ej::ApplicationController
-      before_action :set_conversation, :set_comment
+      before_action :set_conversation, :set_comment, only: [:vote, :post_comment]
 
-      def index; end
+      def index
+        @conversations = client_api.fetch_conversations
+      end
+
+      def show
+        client_api = ClientApi.new(current_user, OpenStruct.new(host: "http://localhost:8000", conversation_id: params[:id]))
+        @conversation = client_api.fetch_conversation
+        @comment = client_api.fetch_next_comment
+      end
 
       def vote
         client_api.post_vote(params[:choice], params[:comment_id])
