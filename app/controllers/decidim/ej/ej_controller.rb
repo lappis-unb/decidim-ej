@@ -8,7 +8,7 @@ module Decidim
       end
 
       def show
-        client_api = ClientApi.new(current_user, OpenStruct.new(host: "http://localhost:8000", conversation_id: params[:id]))
+        client_api = ClientApi.new(current_user, OpenStruct.new(host: current_component.settings[:host], conversation_id: params[:id]))
         @conversation = client_api.fetch_conversation
         @comment = client_api.fetch_next_comment
       end
