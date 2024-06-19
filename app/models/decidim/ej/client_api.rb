@@ -212,7 +212,7 @@ module Decidim
         response = self.class.post(
           new_user_route,
           body: JSON.generate(new_user_data),
-          headers: headers
+          headers: { 'Content-Type' => 'application/json' }
         )
 
         # Update the user's EJ account status
