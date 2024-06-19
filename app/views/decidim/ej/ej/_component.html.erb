@@ -10,17 +10,20 @@
     </p>
   </div>
 
-  <button class="br-button secondary black-and-white-btn" onclick="toggleCommentForm()">
+  <button id="add-new-comment-ej" class="br-button secondary black-and-white-btn" onclick="toggleCommentForm()">
     <i class="fa fa-plus"></i>
     <span>Adicionar comentário à enquete</span>
   </button>
 
   <div class="ej-conversation-container" id="comment-div-form" style="display: none;">
-    <%= form_with url: post_comment_ej_path(current_component.id), method: :post, local: true do |form| %>
+    <%= form_with url: post_comment_ej_path(current_component.id), method: :post, class: "new-comment-container", local: true do |form| %>
       <div class="bp-text-area">
-        <%= form.text_field :body, label: "Comentário", lines: 5 %>
+        <%= form.text_area :body,
+          label: "Deixe aqui seu comentário",
+          placeholder: "Se aprovado pela moderação, seu comentário será disponibilizado para votação na enquete.",
+          rows: 5 %>
       </div>
-      <%= form.submit "Enviar comentário" %>
+      <%= form.submit "Enviar para moderação", class: "br-button primary submit-new-comment-btn" %>
     <% end %>
   </div>
 
@@ -100,10 +103,22 @@ const saveVote = (choice, comment_id) => {
       $("#ej-conversation").replaceWith(response);
     }
   });
-
 }
 
 const toggleCommentForm = () => {
-  $("#comment-div-form").toggle(200);
-}
+  $("#comment-div-form").toggle(200, function() {
+    const button = $("#add-new-comment-ej");
+    const icon = button.find("i");
+    const span = button.find("span");
+
+    if ($("#comment-div-form").is(":visible")) {
+      icon.removeClass("fa-plus").addClass("fa-minus");
+      span.text("Cancelar comentário à enquete");
+    } else {
+      icon.removeClass("fa-minus").addClass("fa-plus");
+      span.text("Adicionar comentário à enquete");
+    }
+  });
+};
+
 </script>
