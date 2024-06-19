@@ -13,8 +13,8 @@ module Decidim
         @comment = client_api.fetch_next_comment
       end
 
-      def comments
-        @comments = client_api.fetch_comments
+      def user_comments
+        @user_comments = client_api.fetch_user_comments
       end
 
       def vote

@@ -40,8 +40,8 @@ module Decidim
         fire_action_request(:conversations)
       end
 
-      def fetch_comments
-        fire_action_request(:comments)
+      def fetch_user_comments
+        fire_action_request(:user_comments)
       end
 
       def fetch_next_comment
@@ -147,7 +147,7 @@ module Decidim
         JSON.parse(response.body)
       end
 
-      def comments
+      def user_comments
         response = self.class.get(
           comment_route,
           headers: headers
