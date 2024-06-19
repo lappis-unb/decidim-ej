@@ -22,7 +22,7 @@ module Decidim
       def post_comment
         client_api.post_comment(params[:body])
 
-        flash[:notice] = "Seu comentário foi enviado com sucesso! Ele será avaliado e postado em breve."
+        flash[:notice] = "Seu comentário foi enviado para moderação. Caso seja aprovado, ficará disponível para votação na enquete."
         redirect_to ej_index_url
       end
 

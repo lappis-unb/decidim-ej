@@ -178,6 +178,16 @@ $black-color: #000;
   line-height: normal;
 }
 
+.new-comment-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  .submit-new-comment-btn {
+    align-self: flex-end;
+  }
+}
+
 @media (min-width: 740px) {
   .ej-conversation-card {
     padding: 48px 40px;

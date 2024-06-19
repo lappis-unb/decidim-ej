@@ -267,7 +267,14 @@ module Decidim
       end
 
       def decidim_password
-        "decidim-#{@user.name}-#{@user.email}"
+        return AttributeEncryptor.decrypt(@user.encrypted_ej_password) if @user.encrypted_ej_password
+
+        new_password = SecureRandom.hex(12)
+
+        @user.encrypted_ej_password = AttributeEncryptor.encrypt(new_password)
+        @user.save!
+
+        new_password
       end
     end
   end
