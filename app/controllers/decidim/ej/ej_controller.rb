@@ -13,6 +13,10 @@ module Decidim
         @comment = client_api.fetch_next_comment
       end
 
+      def comments
+        @comments = client_api.fetch_comments
+      end
+
       def vote
         client_api.post_vote(params[:choice], params[:comment_id])
 

@@ -12,6 +12,7 @@ module Decidim
       routes do
         # Add engine routes here
         post "vote", to: "ej#vote", as: :voting
+        get "comments", to: "ej#comments", as: :comments
         root to: "ej#index"
         resources :ej do
           member do

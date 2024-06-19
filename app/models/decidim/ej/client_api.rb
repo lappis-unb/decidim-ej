@@ -40,12 +40,16 @@ module Decidim
         fire_action_request(:conversations)
       end
 
-      def post_vote(choice, comment_id)
-        fire_action_request(:vote, choice, comment_id)
+      def fetch_comments
+        fire_action_request(:comments)
       end
 
       def fetch_next_comment
         fire_action_request(:next_comment)
+      end
+
+      def post_vote(choice, comment_id)
+        fire_action_request(:vote, choice, comment_id)
       end
 
       def post_comment(content)
@@ -132,10 +136,20 @@ module Decidim
       end
 
       def conversations
-        headers = self.headers.merge({ 'Content-Type': 'application/json' })
-
         response = self.class.get(
           conversations_route,
+          headers: headers
+        )
+
+        raise Unauthorized if response.code == 401
+        raise RequestError unless response.code == 200
+
+        JSON.parse(response.body)
+      end
+
+      def comments
+        response = self.class.get(
+          comment_route,
           headers: headers
         )
 
@@ -198,7 +212,7 @@ module Decidim
         response = self.class.post(
           new_user_route,
           body: JSON.generate(new_user_data),
-          headers: { 'Content-Type' => 'application/json' }
+          headers: headers
         )
 
         # Update the user's EJ account status
