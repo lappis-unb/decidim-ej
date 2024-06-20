@@ -34,22 +34,20 @@
         </div>
       </div>
       <div class="ej-conversation-card__votes">
-        <button onclick="saveVote('agree', <%=  @comment['links']['self'].split('/')[-1]%>)" id="agree">concordo</button>
-          <button onclick="saveVote('disagree', <%=  @comment['links']['self'].split('/')[-1]%>)" id="disagree">discordo</button>
-          <button onclick="saveVote('skip', <%=  @comment['links']['self'].split('/')[-1]%>)" id="skip">pular</button>
+        <button onclick="saveVoteAction('agree', <%=  @comment['links']['self'].split('/')[-1]%>)" id="agree">concordo</button>
+          <button onclick="saveVoteAction('disagree', <%=  @comment['links']['self'].split('/')[-1]%>)" id="disagree">discordo</button>
+          <button onclick="saveVoteAction('skip', <%=  @comment['links']['self'].split('/')[-1]%>)" id="skip">pular</button>
       </div>
   </div>
 </div>
 
 <script>
-const saveVote = (choice, comment_id) => {
+const saveVoteAction = (choice, comment_id) => {
   $.ajax({
     method: "POST",
     url: '<%= voting_path %>',
     data: {"choice": choice, "comment_id": comment_id}
   }).done((response)=>{
-      console.log("Deu bom");
-      console.log(response);
       $("#ej-conversation-grid")[0].outerHTML(response);
   });
 }
