@@ -1,12 +1,42 @@
 <% add_decidim_page_title("EJ") %>
 
+<% if flash.try(:[], :alert) %>
+  <div class="br-message warning new-proposal-error">
+    <div class="icon">
+      <i class="fas fa-check-circle fa-lg" aria-hidden="true"></i>
+    </div>
+    <div class="content" role="alert">
+      <span class="message-title"><%= flash.first.last %></span>
+    </div>
+    <div class="close">
+      <button class="br-button circle small" type="button" aria-label="Fechar a mensagem de alerta">
+        <i class="fas fa-times" aria-hidden="true"></i>
+      </button>
+    </div>
+  </div>
+<% elsif flash.try(:[], :notice) %>
+  <div class="br-message success">
+    <div class="icon">
+      <i class="fas fa-check-circle fa-lg" aria-hidden="true"></i>
+    </div>
+    <div class="content" role="alert">
+      <span class="message-title"><%= flash.first.last %></span>
+    </div>
+    <div class="close">
+      <button class="br-button circle small" type="button" aria-label="Fechar a mensagem de sucesso">
+        <i class="fas fa-times" aria-hidden="true"></i>
+      </button>
+    </div>
+  </div>
+<% end %>
+
 <div>
   <% @conversations.each do |conversation| %>
     <div>
       <h1><%= conversation['text'] %></h1>
     </div>
     <div>
-      <%= link_to "Participar", ej_path(conversation["id"]) %>
+      <%= link_to "Participar", ej_path(conversation["id"]), class: "btn btn-primary" %>
     </div>
   <% end %>
 </div>
@@ -14,3 +44,5 @@
 <div>
   <%= link_to "Meus Comentários", user_comments_path, class: "btn btn-primary" %>
 </div>
+
+
