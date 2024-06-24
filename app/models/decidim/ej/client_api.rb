@@ -36,12 +36,20 @@ module Decidim
         fire_action_request(:conversation)
       end
 
-      def post_vote(choice, comment_id)
-        fire_action_request(:vote, choice, comment_id)
+      def fetch_conversations
+        fire_action_request(:conversations)
+      end
+
+      def fetch_user_comments
+        fire_action_request(:user_comments)
       end
 
       def fetch_next_comment
         fire_action_request(:next_comment)
+      end
+
+      def post_vote(choice, comment_id)
+        fire_action_request(:vote, choice, comment_id)
       end
 
       def post_comment(content)
@@ -122,6 +130,30 @@ module Decidim
         # Make a GET request to the conversation endpoint
         response = self.class.get(conversation_route)
 
+        raise RequestError unless response.code == 200
+
+        JSON.parse(response.body)
+      end
+
+      def conversations
+        response = self.class.get(
+          conversations_route,
+          headers: headers
+        )
+
+        raise Unauthorized if response.code == 401
+        raise RequestError unless response.code == 200
+
+        JSON.parse(response.body)
+      end
+
+      def user_comments
+        response = self.class.get(
+          comment_route,
+          headers: headers
+        )
+
+        raise Unauthorized if response.code == 401
         raise RequestError unless response.code == 200
 
         JSON.parse(response.body)
@@ -222,6 +254,10 @@ module Decidim
 
       def conversation_route
         "#{@host}#{@routes[:conversations]}#{@conversation_id}"
+      end
+
+      def conversations_route
+        "#{@host}#{@routes[:conversations]}"
       end
 
       def random_comment_route
