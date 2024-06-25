@@ -87,38 +87,42 @@
 </div>
 
 <script>
-const saveVote = (choice, comment_id) => {
-  $.ajax({
-    method: "POST",
-    url: '<%= voting_path %>',
-    data: {"choice": choice, "comment_id": comment_id},
+(function() {
+  const saveVote = (choice, comment_id) => {
+    $.ajax({
+      method: "POST",
+      url: '<%= voting_path %>',
+      data: {"choice": choice, "comment_id": comment_id},
 
-    beforeSend: function() {
-      $(`#${choice}-text`).hide();
-      $(`#${choice}-loader`).css("display", "block");
-    },
-    success: function(response) {
-      $(`#${choice}-text`).show();
-      $(`#${choice}-loader`).hide();
-      $("#ej-conversation").replaceWith(response);
-    }
-  });
-}
+      beforeSend: function() {
+        $(`#${choice}-text`).hide();
+        $(`#${choice}-loader`).css("display", "block");
+      },
+      success: function(response) {
+        $(`#${choice}-text`).show();
+        $(`#${choice}-loader`).hide();
+        $("#ej-conversation").replaceWith(response);
+      }
+    });
+  };
+  window.saveVote = saveVote;
 
-const toggleCommentForm = () => {
-  $("#comment-div-form").toggle(200, function() {
-    const button = $("#add-new-comment-ej");
-    const icon = button.find("i");
-    const span = button.find("span");
+  const toggleCommentForm = () => {
+    $("#comment-div-form").toggle(200, function() {
+      const button = $("#add-new-comment-ej");
+      const icon = button.find("i");
+      const span = button.find("span");
 
-    if ($("#comment-div-form").is(":visible")) {
-      icon.removeClass("fa-plus").addClass("fa-minus");
-      span.text("Cancelar comentário à enquete");
-    } else {
-      icon.removeClass("fa-minus").addClass("fa-plus");
-      span.text("Adicionar comentário à enquete");
-    }
-  });
-};
+      if ($("#comment-div-form").is(":visible")) {
+        icon.removeClass("fa-plus").addClass("fa-minus");
+        span.text("Cancelar comentário à enquete");
+      } else {
+        icon.removeClass("fa-minus").addClass("fa-plus");
+        span.text("Adicionar comentário à enquete");
+      }
+    });
+  };
+  window.toggleCommentForm = toggleCommentForm;
+})();
 
 </script>
