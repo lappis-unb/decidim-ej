@@ -1,0 +1,11 @@
+<% add_decidim_page_title("Meus comentários") %>
+
+<div>
+  <% @user_comments.each do |comment| %>
+    <div>
+      <%= link_to comment['links']['self'] do %>
+        <h1><%= comment['content'] %></h1>
+      <% end %>
+    </div>
+  <% end %>
+</div>
