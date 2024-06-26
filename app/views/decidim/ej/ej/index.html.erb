@@ -5,8 +5,19 @@
     <div class="icon">
       <i class="fas fa-check-circle fa-lg" aria-hidden="true"></i>
     </div>
-    <div class="content" role="alert">
-      <span class="message-title"><%= flash.first.last %></span>
+  <% elsif flash.try(:[], :notice) %>
+    <div class="br-message success">
+      <div class="icon">
+        <i class="fas fa-check-circle fa-lg" aria-hidden="true"></i>
+      </div>
+      <div class="content" role="alert">
+        <span class="message-title"><%= flash.first.last %></span>
+      </div>
+      <div class="close">
+        <button class="br-button circle small" type="button" aria-label="Fechar a messagem alterta">
+          <i class="fas fa-times" aria-hidden="true"></i>
+        </button>
+      </div>
     </div>
     <div class="close">
       <button class="br-button circle small" type="button" aria-label="Fechar a mensagem de alerta">

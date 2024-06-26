@@ -1,7 +1,8 @@
 module Decidim
   module Ej
     class EjController < Decidim::Ej::ApplicationController
-      before_action :set_conversation, :set_comment, only: [:vote, :post_comment]
+      before_action :set_conversation, only: [:vote, :post_comment]
+      before_action :set_comment, only: :index
 
       def index
         @conversations = client_api.fetch_conversations
@@ -20,6 +21,8 @@ module Decidim
       def vote
         client_api.post_vote(params[:choice], params[:comment_id])
 
+        @comment = client_api.fetch_next_comment
+
         render partial: "decidim/ej/ej/component"
       end
 
@@ -37,7 +40,7 @@ module Decidim
       end
 
       def set_comment
-        @comment = client_api.fetch_next_comment
+        @comment ||= client_api.fetch_next_comment
       end
 
       def client_api
