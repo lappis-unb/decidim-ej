@@ -132,10 +132,10 @@ module Decidim
         response = self.class.get(random_comment_route, headers: headers)
 
         raise Unauthorized if response.code == 401
-        raise RequestError, "comment could not be retrieved" unless response.code == 200
+        raise RequestError, "O comentário não pôde ser recuperado." unless response.code == 200
 
         body = JSON.parse response.body
-        body = { "content" => "You have voted on all comments. Thank you for the participation." } unless body["content"].present?
+        body = { "content" => "Você já votou em todos os comentários. Obrigada pela sua participação!" } unless body["content"].present?
 
         body
       end
