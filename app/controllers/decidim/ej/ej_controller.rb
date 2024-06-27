@@ -22,6 +22,7 @@ module Decidim
         client_api.post_vote(params[:choice], params[:comment_id])
 
         @comment = client_api.fetch_next_comment
+        @conversation = client_api.fetch_conversation
 
         render partial: "decidim/ej/ej/component"
       end

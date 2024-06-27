@@ -203,6 +203,41 @@ $black-color: #000;
   }
 }
 
+.ej-conversation-card__comments {
+  color: var(--gray-60, #636363);
+  font-variant-numeric: lining-nums proportional-nums;
+  font-family: Rawline;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+.percentage-container {
+  display: flex;
+  flex-direction: column;
+}
+.percentage-title {
+  color: var(--blue-warm-vivid-80, #0C326F);
+  font-variant-numeric: lining-nums proportional-nums;
+  font-family: Rawline;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  text-align: center;
+  line-height: normal;
+  margin: 0;
+}
+.percentage-bar {
+  background-color: var(--blue-warm-vivid-60);
+  height: 10px;
+  flex-shrink: 0;
+}
+.share-ej-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
 @media (min-width: 740px) {
   .ej-conversation-card {
     padding: 48px 40px;

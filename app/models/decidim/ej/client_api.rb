@@ -126,9 +126,25 @@ module Decidim
         response
       end
 
+      def get_user_stats(response)
+        response_user_stats = self.class.get(user_statistics_route, headers: headers)
+
+        formatted_user_stats = {
+          'percent': "#{format('%.2f%%', response_user_stats['participation_ratio'] * 100)}",
+          'comments': "#{response_user_stats['comments']} de #{response_user_stats['total_comments']}"
+        }
+        response_body = JSON.parse(response.body)
+        response_body['user_stats'] = formatted_user_stats
+
+        new_response = response.dup
+        new_response.instance_variable_set(:@body, response_body.to_json)
+        new_response
+      end
+
       def conversation
         # Make a GET request to the conversation endpoint
         response = self.class.get(conversation_route)
+        response = get_user_stats(response)
 
         raise RequestError unless response.code == 200
 
@@ -140,7 +156,6 @@ module Decidim
           conversations_route,
           headers: headers
         )
-
         raise Unauthorized if response.code == 401
         raise RequestError unless response.code == 200
 
@@ -254,6 +269,10 @@ module Decidim
 
       def conversation_route
         "#{@host}#{@routes[:conversations]}#{@conversation_id}"
+      end
+
+      def user_statistics_route
+        "#{@host}#{@routes[:conversations]}#{@conversation_id}/user-statistics/"
       end
 
       def conversations_route
