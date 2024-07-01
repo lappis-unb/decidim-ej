@@ -1,6 +1,6 @@
 /* css for decidim_ej */
 
-body>* {
+body > * {
   font-family: Rawline;
 }
 
@@ -217,7 +217,7 @@ $black-color: #000;
   flex-direction: column;
 }
 .percentage-title {
-  color: var(--blue-warm-vivid-80, #0C326F);
+  color: var(--blue-warm-vivid-80, #0c326f);
   font-variant-numeric: lining-nums proportional-nums;
   font-family: Rawline;
   font-size: 14px;

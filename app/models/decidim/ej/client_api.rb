@@ -129,10 +129,12 @@ module Decidim
       def get_user_stats(response)
         response_user_stats = self.class.get(user_statistics_route, headers: headers)
 
+        participation_ratio = response_user_stats['participation_ratio'] || 0
         formatted_user_stats = {
-          'percent': "#{format('%.2f%%', response_user_stats['participation_ratio'] * 100)}",
+          'percent': "#{format('%.2f%%', participation_ratio * 100)}",
           'comments': "#{response_user_stats['comments']} de #{response_user_stats['total_comments']}"
         }
+
         response_body = JSON.parse(response.body)
         response_body['user_stats'] = formatted_user_stats
 
