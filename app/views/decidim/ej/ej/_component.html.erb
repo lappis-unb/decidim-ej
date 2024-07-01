@@ -10,10 +10,13 @@
     </p>
   </div>
 
-  <button id="add-new-comment-ej" class="br-button secondary black-and-white-btn" onclick="toggleCommentForm()">
-    <i class="fa fa-plus"></i>
-    <span>Adicionar comentário à enquete</span>
-  </button>
+
+  <% if false %>
+    <button id="add-new-comment-ej" class="br-button secondary black-and-white-btn" onclick="toggleCommentForm()">
+      <i class="fa fa-plus"></i>
+      <span>Adicionar comentário à enquete</span>
+    </button>
+  <% end %>
 
   <div class="ej-conversation-container" id="comment-div-form" style="display: none;">
     <%= form_with url: post_comment_ej_path(current_component.id), method: :post, class: "new-comment-container", local: true do |form| %>
