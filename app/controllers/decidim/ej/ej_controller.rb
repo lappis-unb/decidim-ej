@@ -1,6 +1,7 @@
 module Decidim
   module Ej
     class EjController < Decidim::Ej::ApplicationController
+      before_action :authenticate_user!
       before_action :set_conversation, only: [:vote, :post_comment]
       before_action :set_comment, only: :index
 
