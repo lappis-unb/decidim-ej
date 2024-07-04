@@ -5,10 +5,9 @@ module Decidim
       before_action :set_conversation, only: [:vote, :post_comment]
       before_action :set_comment, only: :index
 
-      def index
-        ej_client = EjClient.find_by(component: params[:component_id])
-        redirect_to ej_path(ej_client.conversation_id)
+      def home; end
 
+      def index
         @conversations = client_api.fetch_conversations
       end
 
