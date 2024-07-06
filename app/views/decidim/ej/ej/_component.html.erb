@@ -11,24 +11,25 @@
   </div>
 
 
-  <% if false %>
+  <% if @conversation['participants_can_add_comments'] %>
     <button id="add-new-comment-ej" class="br-button secondary black-and-white-btn" onclick="toggleCommentForm()">
       <i class="fa fa-plus"></i>
       <span>Adicionar comentário à enquete</span>
     </button>
-  <% end %>
 
-  <div class="ej-conversation-container" id="comment-div-form" style="display: none;">
-    <%= form_with url: post_comment_ej_path(current_component.id), method: :post, class: "new-comment-container", local: true do |form| %>
-      <div class="bp-text-area">
-        <%= form.text_area :body,
-          label: "Deixe aqui seu comentário",
-          placeholder: "Se aprovado pela moderação, seu comentário será disponibilizado para votação na enquete.",
-          rows: 5 %>
-      </div>
-      <%= form.submit "Enviar para moderação", class: "br-button primary submit-new-comment-btn" %>
-    <% end %>
-  </div>
+
+    <div class="ej-conversation-container" id="comment-div-form" style="display: none;">
+      <%= form_with url: post_comment_ej_path(current_component.id), method: :post, class: "new-comment-container", local: true do |form| %>
+        <div class="bp-text-area">
+          <%= form.text_area :body,
+            label: "Deixe aqui seu comentário",
+            placeholder: "Se aprovado pela moderação, seu comentário será disponibilizado para votação na enquete.",
+            rows: 5 %>
+        </div>
+        <%= form.submit "Enviar para moderação", class: "br-button primary submit-new-comment-btn" %>
+      <% end %>
+    </div>
+  <% end %>
 
   <div class="ej-conversation-container">
     <% if @conversation['user_stats'] %>
