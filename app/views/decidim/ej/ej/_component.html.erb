@@ -34,8 +34,8 @@
   <div class="ej-conversation-container">
     <% if @conversation['user_stats'] %>
       <div class="percentage-container">
-        <h4 class="percentage-title">Você respondeu <%= @conversation['user_stats']['percent'] %> desta enquete</h4>
-        <div class="percentage-bar" style="width: <%= @conversation['user_stats']['percent'] %>;"></div>
+        <h4 class="percentage-title">Você respondeu <%= @conversation['user_stats'][:percent] %> desta enquete</h4>
+        <div class="percentage-bar" style="width: <%= @conversation['user_stats'][:percent] %>;"></div>
       </div>
     <% end %>
     <div class="ej-conversation-card">

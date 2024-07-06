@@ -1,0 +1,29 @@
+<div class="poll-card">
+    <p class="poll-card-title"><%= conversation["text"] %></p>
+    <div class="poll-profile-info">
+        <img
+            src="https://brasilparticipativo.presidencia.gov.br/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBZ0VpIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--83a2abd12f5092b982cfdec5938eb1296f17c1d2/novo_bp_logo.png"
+            alt="logo-brasil-participativo">
+        </img>
+
+        <p><%= conversation["author"] %></p>
+    </div>
+
+    <div class="poll-theme">
+        <p><%= conversation["title"] %></p>
+    </div>
+
+    <div class="poll-participants">
+        <p><%= conversation["statistics"]["participants"]["voters"] %> participantes </p>
+        <p><%= conversation["statistics"]["votes"]["total"] %> votos totais</p>
+    </div>
+
+    <div class="poll-progress">
+        <p><%= conversation["user_stats"][:comments] %></p>
+        <div class="poll-progress-bar">
+            <div class="percentage-bar" style="width: <%= conversation['user_stats'][:percent] %>;"></div>
+        </div>
+    </div>
+
+        <%= link_to "Acessar enquete", ej_path(conversation["id"]), class: "button small" %>
+</div>

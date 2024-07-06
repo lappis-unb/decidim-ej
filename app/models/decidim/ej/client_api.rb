@@ -126,31 +126,25 @@ module Decidim
         response
       end
 
-      def get_user_stats(response)
+      def get_user_stats(response_body)
         response_user_stats = self.class.get(user_statistics_route, headers: headers)
 
         participation_ratio = response_user_stats['participation_ratio'] || 0
         formatted_user_stats = {
           'percent': "#{format('%.2f%%', participation_ratio * 100)}",
-          'comments': "#{response_user_stats['comments']} de #{response_user_stats['total_comments']}"
+          'comments': response_user_stats['comments'] == 0 ? "Você ainda não votou nesta enquete" : "#{response_user_stats['comments']} de #{response_user_stats['total_comments']}"
         }
 
-        response_body = JSON.parse(response.body)
         response_body['user_stats'] = formatted_user_stats
-
-        new_response = response.dup
-        new_response.instance_variable_set(:@body, response_body.to_json)
-        new_response
+        response_body
       end
 
       def conversation
         # Make a GET request to the conversation endpoint
         response = self.class.get(conversation_route)
-        response = get_user_stats(response)
-
         raise RequestError unless response.code == 200
 
-        JSON.parse(response.body)
+        get_user_stats(JSON.parse(response.body))
       end
 
       def conversations
@@ -161,7 +155,13 @@ module Decidim
         raise Unauthorized if response.code == 401
         raise RequestError unless response.code == 200
 
-        JSON.parse(response.body)
+        conversations = JSON.parse(response.body)
+        conversations.each do |conversation|
+          @conversation_id = conversation["id"]
+          get_user_stats conversation
+        end
+
+        conversations
       end
 
       def user_comments
