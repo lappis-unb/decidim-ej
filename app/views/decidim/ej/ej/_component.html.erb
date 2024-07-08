@@ -19,7 +19,7 @@
 
 
     <div class="ej-conversation-container" id="comment-div-form" style="display: none;">
-      <%= form_with url: post_comment_ej_path(current_component.id), method: :post, class: "new-comment-container", local: true do |form| %>
+      <%= form_with url: post_comment_ej_path(@conversation_id), method: :post, class: "new-comment-container", local: true do |form| %>
         <div class="bp-text-area">
           <%= form.text_area :body,
             label: "Deixe aqui seu comentário",
@@ -34,20 +34,20 @@
   <div class="ej-conversation-container">
     <% if @conversation['user_stats'] %>
       <div class="percentage-container">
-        <h4 class="percentage-title">Você respondeu <%= @conversation['user_stats']['percent'] %> desta enquete</h4>
-        <div class="percentage-bar" style="width: <%= @conversation['user_stats']['percent'] %>;"></div>
+        <h4 class="percentage-title">Você respondeu <%= number_to_percentage(@user_participation_ratio, precision: 2) %> desta enquete</h4>
+        <div class="percentage-bar" style="width: <%= @user_participation_ratio %>%;"></div>
       </div>
     <% end %>
     <div class="ej-conversation-card">
-      <span>
-        <% if @conversation['user_stats'] %>
-          <div class="ej-conversation-card__comments">Comentário <%= @conversation['user_stats']['comments'] %></div>
-        <% end %>
-        <h3 id="comment-content" class="ej-conversation-card__comment">
-          <%= @comment['content'] %>
-        </h3>
-      </span>
-      <% if @comment['content'] != "Você já votou em todos os comentários. Obrigada pela sua participação!" %>
+      <% if @comment['content'].present? %>
+        <span>
+          <% if @conversation['user_stats'] %>
+            <div class="ej-conversation-card__comments">Comentário <%= @conversation['user_stats']['comments'] %> de <%= @conversation['user_stats']['total_comments'] %></div>
+          <% end %>
+          <h3 id="comment-content" class="ej-conversation-card__comment">
+            <%= @comment['content'] %>
+          </h3>
+        </span>
         <div class="ej-conversation-card__votes">
           <button class="br-button primary" onclick="saveVote('agree', <%=  @comment['links']['self'].split('/')[-1]%>)" id="agree">
             <span id="agree-text">
@@ -68,6 +68,9 @@
             <span id="skip-loader" class="loader"></span>
           </button>
         </div>
+      <% else %>
+        <h1>Enquete Respondida</h1>
+        <p>Você já votou em todos os comentários. Obrigado pela sua participação!</p>
       <% end %>
     </div>
   </div>
@@ -116,7 +119,7 @@
   const saveVote = (choice, comment_id) => {
     $.ajax({
       method: "POST",
-      url: '<%= voting_path %>',
+      url: '<%= post_vote_ej_path(@conversation_id) %>',
       data: {"choice": choice, "comment_id": comment_id},
 
       beforeSend: function() {

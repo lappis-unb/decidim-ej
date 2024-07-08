@@ -11,16 +11,22 @@ module Decidim
 
       routes do
         # Add engine routes here
-        post "vote", to: "ej#vote", as: :voting
         get "user_comments", to: "ej#user_comments", as: :user_comments
+
+        get 'link_external_user', controller: 'ej'
 
         root to: "ej#home"
 
         resources :ej, path: 'ej/surveys', only: [:index, :show] do
           member do
             post :post_comment
+            post :post_vote
           end
         end
+      end
+
+      config.to_prepare do
+        Decidim::User.include(UserOverrides)
       end
 
       initializer "Ej.webpacker.assets_path" do
