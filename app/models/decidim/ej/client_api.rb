@@ -131,8 +131,8 @@ module Decidim
 
         participation_ratio = response_user_stats['participation_ratio'] || 0
         formatted_user_stats = {
-          'percent': "#{format('%.2f%%', participation_ratio * 100)}",
-          'comments': response_user_stats['comments'] == 0 ? "Você ainda não votou nesta enquete" : "#{response_user_stats['comments']} de #{response_user_stats['total_comments']}"
+          percent: format('%.2f%%', participation_ratio * 100).to_s,
+          comments: response_user_stats['comments'] == 0 ? "Você ainda não votou nesta enquete" : "Você votou em #{response_user_stats["comments"]} de #{response_user_stats["total_comments"]} comentários"
         }
 
         response_body['user_stats'] = formatted_user_stats

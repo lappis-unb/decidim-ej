@@ -1,0 +1,35 @@
+.ej-button {
+    --button-radius: 100em;
+    --button-xsmall: 24px;
+    --button-small: 32px;
+    --button-medium: 40px;
+    --button-large: 48px;
+
+    border: 1px solid var(--blue-warm-vivid-70);
+    text-transform: none;
+    align-items: center;
+    border: 0;
+    border-radius: var(--button-radius);
+    color: var(---white);
+    cursor: pointer;
+    display: inline-flex;
+    font-weight: var(--font-weight-semi-bold);
+    height: var(--button-medium);
+    justify-content: center;
+    overflow: hidden;
+    padding: 0 var(--button-xsmall);
+    position: relative;
+    text-align: center;
+    vertical-align: middle;
+    white-space: wrap;
+    width: auto;
+    gap: 10px;
+    line-height: 1.1rem;
+    margin: 0;
+    background-color: #335BAE;
+}
+
+.ej-button:hover {
+    background-image: linear-gradient(rgba(var(--interactive-rgb-primary-btn), var(--hover)),
+            rgba(var(--interactive-rgb-primary-btn), var(--hover)));
+}

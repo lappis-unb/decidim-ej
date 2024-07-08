@@ -1,0 +1,100 @@
+.poll-card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 352px);
+    grid-gap: 24px;
+    justify-content: center;
+}
+
+.poll-card {
+    box-shadow: 0px 3px 6px 0px #33333329;
+    display: flex;
+    flex-direction: column;
+    padding: 24px 16px 16px 16px;
+    border-radius: 4px;
+    border-top: solid 8px;
+    border-top-color: #155BCB;
+    gap: 16px;
+
+    >.poll-card-title {
+        font-size: 20px;
+        font-weight: 600;
+        margin-bottom: 8px;
+        color: #1351B4;
+    }
+
+    >.poll-profile-info {
+        display: flex;
+        gap: 8px;
+        margin-top: auto;
+
+        >img {
+            border-radius: 100%;
+            width: 20px;
+            height: 20px;
+        }
+
+        >p {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 0px;
+            color: #1351B4;
+        }
+    }
+
+    >.poll-theme {
+        padding: 4px 8px;
+        margin: 8px 0px;
+        background: #F8F8F8;
+
+        >p {
+            color: #1351B4;
+            margin: 0;
+            font-size: 12px;
+            font-weight: 400;
+        }
+    }
+
+    >.poll-participants {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        >p:first-child {
+            margin-bottom: 4px;
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        >p:last-child {
+            font-size: 14px;
+            font-weight: 400;
+        }
+    }
+
+    >.poll-progress {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 16px 0;
+
+        >p {
+            margin-bottom: 8px;
+            color: #0C326F;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        >.poll-progress-bar {
+            height: 10px;
+            width: calc(100% + 32px);
+            border-top: solid 1px;
+            border-bottom: solid 1px;
+            border-color: #E6E6E6;
+
+            >.percentage-bar {
+                height: 100%;
+                background: #155BCB;
+            }
+        }
+    }
+}
