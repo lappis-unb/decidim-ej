@@ -5,12 +5,14 @@
     <p class="container-subtitle-header">Vote e comente em enquetes para ajudar a construir a opinião popular.</p>
   </div>
 
+  <% if false %>
   <div class="ej-button">
     <span class="create-proposal-text">
       <i class="fa-solid fa-plus fa-md"></i>
       Criar nova enquete
     </span>
   </div>
+  <% end %>
 
   <p class="conversation-quantity"><%= @conversations.length %> enquetes encontradas</p>
 
@@ -61,9 +63,11 @@
       <% end %>
   </div>
 
+  <% if false %>
   <div>
     <%= link_to "Meus Comentários", user_comments_path, class: "btn btn-primary" %>
   </div>
+  <% end %>
 
 </div>
 

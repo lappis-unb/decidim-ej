@@ -30,6 +30,10 @@ module Decidim
           fire_action_request(:conversations)
         end
 
+        def fetch_user_stats(conversation_id)
+          fire_action_request(:user_statistics, conversation_id)
+        end
+
         def fetch_user_comments
           fire_action_request(:user_comments)
         end
@@ -94,19 +98,7 @@ module Decidim
           raise Exceptions::Unauthorized if response.code == 401
           raise Exceptions::RequestError unless response.success?
 
-          conversations = JSON.parse(response.body)
-          conversations.each do |conversation|
-            response_user_stats = user_statistics(conversation["id"])
-            participation_ratio = response_user_stats['participation_ratio'] || 0
-            formatted_user_stats = {
-              percent: format('%.2f%%', participation_ratio * 100).to_s,
-              comments: response_user_stats['comments'] == 0 ? "Você ainda não votou nesta enquete" : "Você votou em #{response_user_stats["comments"]} de #{response_user_stats["total_comments"]} comentários"
-            }
-
-            conversation["user_stats"] = formatted_user_stats
-          end
-
-          conversations
+          JSON.parse(response.body)
         end
 
         def user_comments

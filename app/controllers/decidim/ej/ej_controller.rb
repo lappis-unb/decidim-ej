@@ -24,6 +24,13 @@ module Decidim
 
       def index
         @conversations = api_client.fetch_conversations
+
+        @conversations.each do |conversation|
+          response_user_stats = @api_client.fetch_user_stats(conversation["id"])
+          conversation["user_stats"] = response_user_stats
+        end
+
+        @conversations
       end
 
       def show
