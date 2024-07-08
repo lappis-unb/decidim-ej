@@ -1,0 +1,12 @@
+<% add_decidim_page_title("Ej") %>
+
+<div class="ej-conversation-card">
+  <% if @error_message %>
+    <h1>Algo deu errado!</h1>
+    <p><%= @error_message %></p>
+  <% else %>
+    <h1>Sucesso!</h1>
+    <p>Sua conta foi vinculada com sucesso! Agora você pode continuar participando das enquetes livremente.</p>
+  <% end %>
+  <%= link_to("Continuar", ej_index_path, class: "btn btn-primary") %>
+</div>

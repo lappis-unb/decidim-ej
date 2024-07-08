@@ -45,7 +45,7 @@
 const saveVoteAction = (choice, comment_id) => {
   $.ajax({
     method: "POST",
-    url: '<%= voting_path %>',
+    url: '<%= post_comment_ej_path(@conversation_id) %>',
     data: {"choice": choice, "comment_id": comment_id}
   }).done((response)=>{
       $("#ej-conversation-grid")[0].outerHTML(response);
