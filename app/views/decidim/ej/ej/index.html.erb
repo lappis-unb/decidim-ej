@@ -1,5 +1,19 @@
 <% add_decidim_page_title("EJ") %>
-<div class="br-container-lg">
+<div class="br-container-lg container-conversation">
+  <div>
+    <h2 class="container-title-header">Enquetes</h2>
+    <p class="container-subtitle-header">Vote e comente em enquetes para ajudar a construir a opinião popular.</p>
+  </div>
+
+  <div class="ej-button">
+    <span class="create-proposal-text">
+      <i class="fa-solid fa-plus fa-md"></i>
+      Criar nova enquete
+    </span>
+  </div>
+
+  <p class="conversation-quantity"><%= @conversations.length %> enquetes encontradas</p>
+
   <% if flash.try(:[], :alert) %>
     <div class="br-message warning new-proposal-error">
       <div class="icon">
