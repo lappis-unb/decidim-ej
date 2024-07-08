@@ -30,6 +30,7 @@
 }
 
 .ej-button:hover {
+    color: white;
     background-image: linear-gradient(rgba(var(--interactive-rgb-primary-btn), var(--hover)),
             rgba(var(--interactive-rgb-primary-btn), var(--hover)));
 }
