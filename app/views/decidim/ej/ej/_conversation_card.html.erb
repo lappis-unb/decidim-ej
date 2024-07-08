@@ -1,6 +1,6 @@
-<div class="poll-card">
-    <p class="poll-card-title"><%= conversation["text"] %></p>
-    <div class="poll-profile-info">
+<div class="conversation-card">
+    <p class="conversation-card-title"><%= conversation["text"] %></p>
+    <div class="conversation-profile-info">
         <img
             src="https://brasilparticipativo.presidencia.gov.br/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBZ0VpIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--83a2abd12f5092b982cfdec5938eb1296f17c1d2/novo_bp_logo.png"
             alt="logo-brasil-participativo">
@@ -9,18 +9,18 @@
         <p><%= conversation["author"] %></p>
     </div>
 
-    <div class="poll-theme">
+    <div class="conversation-theme">
         <p><%= conversation["title"] %></p>
     </div>
 
-    <div class="poll-participants">
+    <div class="conversation-participants">
         <p><%= conversation["statistics"]["participants"]["voters"] %> participantes </p>
         <p><%= conversation["statistics"]["votes"]["total"] %> votos totais</p>
     </div>
 
-    <div class="poll-progress">
+    <div class="conversation-progress">
         <p><%= conversation["user_stats"][:comments] %></p>
-        <div class="poll-progress-bar">
+        <div class="conversation-progress-bar">
             <div class="percentage-bar" style="width: <%= conversation['user_stats'][:percent] %>;"></div>
         </div>
     </div>

@@ -1,11 +1,11 @@
-.poll-card-grid {
+.conversation-card-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, 352px);
     grid-gap: 24px;
     justify-content: center;
 }
 
-.poll-card {
+.conversation-card {
     box-shadow: 0px 3px 6px 0px #33333329;
     display: flex;
     flex-direction: column;
@@ -15,14 +15,14 @@
     border-top-color: #155BCB;
     gap: 16px;
 
-    >.poll-card-title {
+    >.conversation-card-title {
         font-size: 20px;
         font-weight: 600;
         margin-bottom: 8px;
         color: #1351B4;
     }
 
-    >.poll-profile-info {
+    >.conversation-profile-info {
         display: flex;
         gap: 8px;
         margin-top: auto;
@@ -41,7 +41,7 @@
         }
     }
 
-    >.poll-theme {
+    >.conversation-theme {
         padding: 4px 8px;
         margin: 8px 0px;
         background: #F8F8F8;
@@ -54,7 +54,7 @@
         }
     }
 
-    >.poll-participants {
+    >.conversation-participants {
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -71,7 +71,7 @@
         }
     }
 
-    >.poll-progress {
+    >.conversation-progress {
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -84,7 +84,7 @@
             font-weight: 600;
         }
 
-        >.poll-progress-bar {
+        >.conversation-progress-bar {
             height: 10px;
             width: calc(100% + 32px);
             border-top: solid 1px;

@@ -55,9 +55,9 @@
     </div>
   <% end %>
 
-  <div class="poll-card-grid">
+  <div class="conversation-card-grid">
       <% @conversations.each do |conversation| %>
-        <%= render partial: 'poll_card', locals: { conversation: conversation } %>
+        <%= render partial: 'conversation_card', locals: { conversation: conversation } %>
       <% end %>
   </div>
 
