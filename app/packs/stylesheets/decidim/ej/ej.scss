@@ -1,92 +1,7 @@
 /* css for decidim_ej */
 
-body > * {
+body>* {
   font-family: Rawline;
-}
-
-$base-color: rgba(48, 191, 211, 0.15);
-$gray-color: #777;
-$white-color: white;
-$green-color: rgba(24, 174, 0, 1);
-$red-color: rgba(199, 0, 0, 1);
-$black-color: #000;
-
-.ej-conversation-container {
-  width: 100%;
-}
-
-.ej-conversation-card {
-  display: flex;
-  padding: 16px 8px;
-  flex-direction: column;
-  gap: 32px;
-  align-self: stretch;
-  background: var(--gray-2, #f8f8f8);
-  width: 100%;
-
-  &__com &__stats {
-    display: flex;
-    gap: 0.75rem;
-
-    div {
-      display: flex;
-      gap: 0.75rem;
-    }
-  }
-
-  &__title {
-    margin-top: 1rem;
-
-    div:first-child {
-      color: $gray-color;
-      text-transform: uppercase;
-    }
-
-    div:nth-child(2) {
-      font-weight: 600;
-      text-transform: uppercase;
-    }
-  }
-
-  &__comment {
-    color: var(--pure-100, #000);
-    font-variant-numeric: lining-nums proportional-nums;
-    font-size: 1.5rem;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
-    padding: 0;
-    margin: 0;
-  }
-
-  &__votes {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-
-    button {
-      flex: 1;
-      gap: 8px;
-      text-transform: capitalize;
-      padding: 10px;
-    }
-
-    button[id="agree"] {
-      background-color: $green-color;
-      color: $white-color;
-    }
-
-    button[id="disagree"] {
-      background-color: $red-color;
-      color: $white-color;
-    }
-
-    button[id="skip"] {
-      background: transparent;
-      color: var(--gray-80, #333);
-      border: 1px solid var(--gray-80);
-    }
-  }
 }
 
 .card__grid:hover {
@@ -105,16 +20,6 @@ $black-color: #000;
   display: none;
 }
 
-@keyframes rotation {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
 .ej-component-container {
   display: flex;
   flex-direction: column;
@@ -128,53 +33,6 @@ $black-color: #000;
     margin: 0;
     padding: 0;
   }
-}
-
-.ej-conversation-header {
-  &__title {
-    color: var(--gray-90, #1b1b1b);
-    font-size: 2rem;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
-  }
-
-  &__subtitle {
-    color: var(--gray-60, #636363);
-    font-variant-numeric: lining-nums proportional-nums;
-    font-size: 1.26rem;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-  }
-}
-
-.ej-conversation-stats__card {
-  display: flex;
-  padding: 24px;
-  gap: 16px;
-  flex: 1;
-  border-radius: 4px;
-  background: var(--blue-warm-vivid-5);
-}
-
-.ej-conversation__general-stats {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 16px;
-  width: 100%;
-
-  i {
-    color: var(--blue-warm-vivid-70, #1351b4);
-    margin-top: 6px;
-  }
-}
-
-.ej-conversation-stats__card-content {
-  display: flex;
-  flex-direction: column;
 }
 
 .ej-stats__number {
@@ -203,53 +61,8 @@ $black-color: #000;
   }
 }
 
-.ej-conversation-card__comments {
-  color: var(--gray-60, #636363);
-  font-variant-numeric: lining-nums proportional-nums;
-  font-family: Rawline;
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
-}
-.percentage-container {
-  display: flex;
-  flex-direction: column;
-}
-.percentage-title {
-  color: var(--blue-warm-vivid-80, #0c326f);
-  font-variant-numeric: lining-nums proportional-nums;
-  font-family: Rawline;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 600;
-  text-align: center;
-  line-height: normal;
-  margin: 0;
-}
-.percentage-bar {
-  background-color: var(--blue-warm-vivid-60);
-  height: 10px;
-  flex-shrink: 0;
-}
 .share-ej-container {
   display: flex;
   justify-content: center;
   width: 100%;
-}
-
-@media (min-width: 740px) {
-  .ej-conversation-card {
-    padding: 48px 40px;
-
-    &__votes {
-      flex-direction: row;
-      flex-wrap: wrap;
-    }
-  }
-
-  .ej-conversation__general-stats {
-    flex-direction: row;
-    width: 100%;
-  }
 }

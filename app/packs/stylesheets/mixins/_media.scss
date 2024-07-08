@@ -1,0 +1,25 @@
+@media (min-width: 740px) {
+    .ej-conversation-card {
+        padding: 48px 40px;
+
+        &__votes {
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+    }
+
+    .ej-conversation__general-stats {
+        flex-direction: row;
+        width: 100%;
+    }
+}
+
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
