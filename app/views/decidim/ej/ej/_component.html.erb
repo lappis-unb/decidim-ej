@@ -10,7 +10,6 @@
     </p>
   </div>
 
-
   <% if @conversation['participants_can_add_comments'] %>
     <button id="add-new-comment-ej" class="br-button secondary black-and-white-btn" onclick="toggleCommentForm()">
       <i class="fa fa-plus"></i>
@@ -75,43 +74,45 @@
     </div>
   </div>
 
-  <span class="br-divider" style="width: 100%"></span>
+  <% if !@has_stats %>
+    <span class="br-divider" style="width: 100%"></span>
 
-  <div class="ej-conversation__general-stats">
-    <div class="ej-conversation-stats__card">
-      <i class="fa fa-users fa-2x"></i>
-      <div class="ej-conversation-stats__card-content">
-        <span class="ej-stats__number">
-          <%= @conversation['statistics']['comments']['approved'] %>
-        </span>
-        <span class="ej-stats__description">
-          pessoas estão participando desta enquete
-        </span>
+    <div class="ej-conversation__general-stats">
+      <div class="ej-conversation-stats__card">
+        <i class="fa fa-users fa-2x"></i>
+        <div class="ej-conversation-stats__card-content">
+          <span class="ej-stats__number">
+            <%= @conversation['statistics']['comments']['approved'] %>
+          </span>
+          <span class="ej-stats__description">
+            pessoas estão participando desta enquete
+          </span>
+        </div>
+      </div>
+      <div class="ej-conversation-stats__card">
+        <i class="fa fa-vote-yea fa-2x"></i>
+        <div class="ej-conversation-stats__card-content">
+          <span class="ej-stats__number">
+            <%= @conversation['statistics']['votes']['total'] %>
+          </span>
+          <span class="ej-stats__description">
+            votos foram efetuados nesta enquete
+          </span>
+        </div>
       </div>
     </div>
-    <div class="ej-conversation-stats__card">
-      <i class="fa fa-vote-yea fa-2x"></i>
-      <div class="ej-conversation-stats__card-content">
-        <span class="ej-stats__number">
-          <%= @conversation['statistics']['votes']['total'] %>
-        </span>
-        <span class="ej-stats__description">
-          votos foram efetuados nesta enquete
-        </span>
-      </div>
-    </div>
-  </div>
 
-  <div class="share-ej-container">
-    <%= render partial: "decidim/shared/share_modal", locals: {
-        button_name: 'Compartilhar enquete',
-        title_name: 'Compartilhe essa enquete',
-        translation_component: '',
-        resource_name: 'resource_title(@meeting)',
-        component_name: 'resource_title(current_participatory_space)'
-      }
-    %>
-  </div>
+    <div class="share-ej-container">
+      <%= render partial: "decidim/shared/share_modal", locals: {
+          button_name: 'Compartilhar enquete',
+          title_name: 'Compartilhe essa enquete',
+          translation_component: '',
+          resource_name: 'resource_title(@meeting)',
+          component_name: 'resource_title(current_participatory_space)'
+        }
+      %>
+    </div>
+  <% end %>
 </div>
 
 <script>

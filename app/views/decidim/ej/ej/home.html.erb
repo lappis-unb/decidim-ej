@@ -1,6 +1,75 @@
-<h1>Componente Enquete EJ</h1>
-<p>Este é o componente enquete EJ</p>
+<section class="br-container-lg home-sections-container">
+  <div class="hero-info-content">
+    <img alt="Hero image"
+         src=https://brasilparticipativo.presidencia.gov.br/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBc2FkIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--4ffa8dfccffc51b9104ba81fe1ac316b843e6a3b/Image_1.png
+         class="hero-info-img">
+    <div class="hero-info-right-content">
+      <h2 class="page-subtitle">Crie e vote em propostas!</h2>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. In iaculis velit sed elementum consectetur.
+        Nullam auctor metus nec augue varius, ut dictum metus malesuada. Suspendisse vel mattis arcu. Sed tempus
+        fringilla pretium. In feugiat mauris in est viverra, sed sagittis orci hendrerit. Duis sit amet nulla
+        ligula. Praesent euismod eros vel ante semper vehicula. Nunc maximus pulvinar vulputate. Pellentesque
+        nulla elit, fermentum ut pretium ut, sodales a sem. Donec eget velit consectetur, porta arcu sed,
+        pulvinar purus.
+      </p>
+      <div class="hero-info-actions">
+        <a href="/processes/planoclima/f/14/" class="br-button secondary">
+          Criar proposta
+        </a>
+        <a href="/processes/planoclima/f/31/" class="br-button active primary">
+          Acessar propostas
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
 
-<%= render partial: 'component' %>
+<div class="br-container-lg mt-4 mb-4">
+  <%= render partial: 'component', locals: { has_stats: false } %>
+</div>
 
-<%= link_to 'Lista de Enquetes', ej_index_path, class: 'button small' %>
+<section class="extended home-section" id="html-block">
+  <div class="white-divider"></div>
+  <section class="home-sections-container" id="participatory-process-section">
+    <h2>Como participar do Plano Clima</h2>
+    <p>Entenda e acompanhe aqui a trilha de participação digital.
+    <div class="br-container-lg home-sections-content participatory-items">
+      <div class="step-process-container">
+        <a href="#" class="step-process-card">
+          <div class="step-process-card__content current">
+            <i class="fa-2xl fa-check-to-slot fa-solid"></i>
+            <p class="stage-text">Etapa 1</p>
+            <h3>Envio de Propostas</h3>
+            <p class="step-date">5 de Junho a 5 de Agosto de 2024</p>
+          </div>
+        </a>
+        <a href="#" class="step-process-card">
+          <div class="step-process-card__content"><i class="fa-2xl fa-check-to-slot fa-solid"></i>
+            <p class="stage-text">Devolutiva da etapa 1</p>
+            <h3>Propostas mais votadas</h3>
+            <p class="step-date">Agosto/Setembro
+          </div>
+        </a>
+        <a href="#" class="step-process-card">
+          <div class="step-process-card__content"><i class="fa-2xl fa-check-to-slot fa-solid"></i>
+            <p class="stage-text">Etapa 2</p>
+            <h3>Consulta Pública dos capítulos do Plano</h3>
+            <p class="step-date">Outubro</p>
+          </div>
+        </a>
+        <a href="#" class="step-process-card">
+          <div class="step-process-card__content">
+            <i class="fa-2xl fa-check-to-slot fa-solid"></i>
+            <p class="stage-text">Devolutiva da etapa 2</p>
+            <h3>Texto final do Plano Clima</h3>
+            <p class="step-date">Novembro</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+  <div class="white-divider"></div>
+</section>
+
+<%# link_to 'Lista de Enquetes', ej_index_path, class: 'button small' #%>
