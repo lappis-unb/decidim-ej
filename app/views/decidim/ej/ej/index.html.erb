@@ -1,18 +1,73 @@
 <% add_decidim_page_title("EJ") %>
+<div class="br-container-lg container-conversation">
+  <div>
+    <h2 class="container-title-header">Enquetes</h2>
+    <p class="container-subtitle-header">Vote e comente em enquetes para ajudar a construir a opinião popular.</p>
+  </div>
 
-<div>
-  <% @conversations.each do |conversation| %>
-    <div>
-      <h1><%= conversation['text'] %></h1>
+  <% if false %>
+  <div class="ej-button">
+    <span class="create-proposal-text">
+      <i class="fa-solid fa-plus fa-md"></i>
+      Criar nova enquete
+    </span>
+  </div>
+  <% end %>
+
+  <p class="conversation-quantity"><%= @conversations.length %> enquetes encontradas</p>
+
+  <% if flash.try(:[], :alert) %>
+    <div class="br-message warning new-proposal-error">
+      <div class="icon">
+        <i class="fas fa-check-circle fa-lg" aria-hidden="true"></i>
+      </div>
+    <% elsif flash.try(:[], :notice) %>
+      <div class="br-message success">
+        <div class="icon">
+          <i class="fas fa-check-circle fa-lg" aria-hidden="true"></i>
+        </div>
+        <div class="content" role="alert">
+          <span class="message-title"><%= flash.first.last %></span>
+        </div>
+        <div class="close">
+          <button class="br-button circle small" type="button" aria-label="Fechar a messagem alterta">
+            <i class="fas fa-times" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+      <div class="close">
+        <button class="br-button circle small" type="button" aria-label="Fechar a mensagem de alerta">
+          <i class="fas fa-times" aria-hidden="true"></i>
+        </button>
+      </div>
     </div>
-    <div>
-      <%= link_to "Participar", ej_path(conversation["id"]), class: "btn btn-primary" %>
+  <% elsif flash.try(:[], :notice) %>
+    <div class="br-message success">
+      <div class="icon">
+        <i class="fas fa-check-circle fa-lg" aria-hidden="true"></i>
+      </div>
+      <div class="content" role="alert">
+        <span class="message-title"><%= flash.first.last %></span>
+      </div>
+      <div class="close">
+        <button class="br-button circle small" type="button" aria-label="Fechar a mensagem de sucesso">
+          <i class="fas fa-times" aria-hidden="true"></i>
+        </button>
+      </div>
     </div>
   <% end %>
-</div>
 
-<div>
-  <%= link_to "Meus Comentários", user_comments_path, class: "btn btn-primary" %>
-</div>
+  <div class="conversation-card-grid">
+      <% @conversations.each do |conversation| %>
+        <%= render partial: 'conversation_card', locals: { conversation: conversation } %>
+      <% end %>
+  </div>
 
+  <% if false %>
+  <div>
+    <%= link_to "Meus Comentários", user_comments_path, class: "btn btn-primary" %>
+  </div>
+  <% end %>
+
+</div>
 

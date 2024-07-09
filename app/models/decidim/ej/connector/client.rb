@@ -30,6 +30,10 @@ module Decidim
           fire_action_request(:conversations)
         end
 
+        def fetch_user_stats(conversation_id)
+          fire_action_request(:user_statistics, conversation_id)
+        end
+
         def fetch_user_comments
           fire_action_request(:user_comments)
         end
@@ -56,6 +60,18 @@ module Decidim
 
         attr_reader :host, :user
 
+        def user_statistics(conversation_id)
+          user_specific_data_response = HTTParty.get("#{host}#{user_statistics_path(conversation_id)}", headers: authorization_headers)
+          raise Exceptions::Unauthorized if user_specific_data_response.code == 401
+
+          unless user_specific_data_response.success?
+            Rails.logger.error("Error while getting user conversation statistics data. Response: #{user_specific_data_response}")
+            raise Exceptions::RequestError
+          end
+
+          user_specific_data_response
+        end
+
         def conversation(conversation_id)
           core_data_response = HTTParty.get("#{host}#{conversations_path(conversation_id)}", headers: authorization_headers)
           raise Exceptions::Unauthorized if core_data_response.code == 401
@@ -65,13 +81,7 @@ module Decidim
             raise Exceptions::RequestError
           end
 
-          user_specific_data_response = HTTParty.get("#{host}#{user_statistics_path(conversation_id)}", headers: authorization_headers)
-          raise Exceptions::Unauthorized if user_specific_data_response.code == 401
-
-          unless user_specific_data_response.success?
-            Rails.logger.error("Error while getting user conversation statistics data. Response: #{user_specific_data_response}")
-            raise Exceptions::RequestError
-          end
+          user_specific_data_response = user_statistics(conversation_id)
 
           response = core_data_response.with_indifferent_access
           response[:user_stats] = user_specific_data_response.with_indifferent_access

@@ -1,0 +1,29 @@
+<div class="conversation-card">
+    <p class="conversation-card-title"><%= conversation["text"] %></p>
+    <div class="conversation-profile-info">
+        <img
+            src="https://brasilparticipativo.presidencia.gov.br/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBZ0VpIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--83a2abd12f5092b982cfdec5938eb1296f17c1d2/novo_bp_logo.png"
+            alt="logo-brasil-participativo">
+        </img>
+
+        <p><%= conversation["author"] %></p>
+    </div>
+
+    <div class="conversation-theme">
+        <p><%= conversation["title"] %></p>
+    </div>
+
+    <div class="conversation-participants">
+        <p><%= conversation["statistics"]["participants"]["voters"] %> participantes </p>
+        <p><%= conversation["statistics"]["votes"]["total"] %> votos totais</p>
+    </div>
+
+    <div class="conversation-progress">
+        <p><%= conversation["user_stats"]["comments"] == 0 ? "Você ainda não votou nesta enquete" : "Você votou em #{conversation["user_stats"]["comments"]} de #{conversation["user_stats"]["total_comments"]} comentários" %></p>
+        <div class="conversation-progress-bar">
+            <div class="percentage-bar" style="width: <%= number_to_percentage(conversation["user_stats"]["participation_ratio"] * 100, precision: 2, separator: '.') %>;"></div>
+        </div>
+    </div>
+
+        <%= link_to "Acessar enquete", ej_path(conversation["id"]), class: "ej-button small" %>
+</div>
