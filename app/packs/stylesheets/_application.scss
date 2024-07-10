@@ -1,0 +1,16 @@
+// Imports all of CSS files
+// Configuration
+@import "config/variables";
+@import "config/reset";
+
+// Components
+@import "components/btn";
+@import "components/conversation";
+@import "components/percentage";
+@import "components/conversation_card";
+
+// Layouts
+@import "layouts/container";
+
+// Mixins
+@import "mixins/media";

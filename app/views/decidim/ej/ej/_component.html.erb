@@ -34,14 +34,18 @@
     <% if @conversation['user_stats'] %>
       <div class="percentage-container">
         <h4 class="percentage-title">Você respondeu <%= number_to_percentage(@user_participation_ratio, precision: 2) %> desta enquete</h4>
-        <div class="percentage-bar" style="width: <%= @user_participation_ratio %>%;"></div>
+        <div style="background: var(--pure-0);">
+          <div class="percentage-bar" style="width: <%= @user_participation_ratio %>%;"></div>
+        </div>
       </div>
     <% end %>
     <div class="ej-conversation-card">
       <% if @comment['content'].present? %>
         <span>
           <% if @conversation['user_stats'] %>
-            <div class="ej-conversation-card__comments">Comentário <%= @conversation['user_stats']['comments'] %> de <%= @conversation['user_stats']['total_comments'] %></div>
+            <div class="ej-conversation-card__comments">
+              Comentário <%= @conversation['user_stats']['comments'] %> de <%= @conversation['user_stats']['total_comments'] %>
+            </div>
           <% end %>
           <h3 id="comment-content" class="ej-conversation-card__comment">
             <%= @comment['content'] %>
@@ -68,13 +72,15 @@
           </button>
         </div>
       <% else %>
-        <h1>Enquete Respondida</h1>
-        <p>Você já votou em todos os comentários. Obrigado pela sua participação!</p>
+        <h3 class="ej-conversation-card__comment">
+          Parabéns! Você concluiu seus votos nesta enquete.
+        </h3>
+        <p>Acesse a lista de enquetes para votar em outros comentários ou sorteie uma enquete aleatória.</p>
       <% end %>
     </div>
   </div>
 
-  <% if !@has_stats %>
+  <% if !defined?(has_no_stats) %>
     <span class="br-divider" style="width: 100%"></span>
 
     <div class="ej-conversation__general-stats">

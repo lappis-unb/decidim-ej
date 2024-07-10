@@ -1,8 +1,6 @@
-<section class="br-container-lg home-sections-container">
-  <div class="hero-info-content">
-    <img alt="Hero image"
-         src=https://brasilparticipativo.presidencia.gov.br/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBc2FkIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--4ffa8dfccffc51b9104ba81fe1ac316b843e6a3b/Image_1.png
-         class="hero-info-img">
+<section class="br-container-lg">
+  <div class="ej-hero-info-content">
+    <img alt="Hero image" class="ej-hero-info-img" src="" />
     <div class="hero-info-right-content">
       <h2 class="page-subtitle">Crie e vote em propostas!</h2>
       <p>
@@ -14,19 +12,25 @@
         pulvinar purus.
       </p>
       <div class="hero-info-actions">
-        <a href="/processes/planoclima/f/14/" class="br-button secondary">
-          Criar proposta
-        </a>
-        <a href="/processes/planoclima/f/31/" class="br-button active primary">
-          Acessar propostas
+        <a href="" class="br-button primary">
+          CTA
         </a>
       </div>
     </div>
   </div>
 </section>
 
-<div class="br-container-lg mt-4 mb-4">
-  <%= render partial: 'component', locals: { has_stats: false } %>
+<div class="ej-home-survey-container mt-5">
+  <div class="br-container-lg">
+    <%= render partial: 'component', locals: { has_no_stats: true } %>
+  </div>
+
+  <div class="centered-content mt-4">
+    <a href="#" class="br-button primary">
+      <span class="mr-2">Acessar página da enquete</span>
+      <i class="fa fa-arrow-right"></i>
+    </a>
+  </div>
 </div>
 
 <section class="extended home-section" id="html-block">
@@ -71,5 +75,7 @@
   </section>
   <div class="white-divider"></div>
 </section>
+
+<%= render partial: 'footer' %>
 
 <%# link_to 'Lista de Enquetes', ej_index_path, class: 'button small' #%>
