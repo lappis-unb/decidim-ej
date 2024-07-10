@@ -63,11 +63,11 @@
       <% end %>
   </div>
 
-  <% if false %>
-  <div>
-    <%= link_to "Meus Comentários", user_comments_path, class: "btn btn-primary" %>
-  </div>
+  <% if true %>
+    <%= link_to "Meus Comentários", user_comments_path, class: "button small" %>
+    <%= link_to 'Meus Votos', user_votes_path, class: 'button small' %>
   <% end %>
+
 
 </div>
 
