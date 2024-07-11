@@ -1,9 +1,9 @@
 <% add_decidim_page_title("Ej") %>
 
 <div class="ej-conversation-card">
-  <% if @error_message %>
+  <% if flash.try(:[], :alert) %>
     <h1>Algo deu errado!</h1>
-    <p><%= @error_message %></p>
+    <p><%= flash.first.last %></p>
   <% else %>
     <h1>Sucesso!</h1>
     <p>Sua conta foi vinculada com sucesso! Agora você pode continuar participando das enquetes livremente.</p>

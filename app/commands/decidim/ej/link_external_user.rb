@@ -7,10 +7,11 @@ module Decidim
         @jwt_token = jwt_token
         @current_user = current_user
         @api_client = api_client
+
+        extract_jwt_data
       end
 
       def call
-        extract_jwt_data
         return broadcast(:invalid) unless user_data_valid?
         return broadcast(:user_taken) if user_already_linked?
         return broadcast(:token_taken) if token_already_linked?
@@ -20,13 +21,12 @@ module Decidim
 
       private
 
-      attr_accessor :user_data
-      attr_reader :jwt_token, :current_user, :api_client
+      attr_reader :jwt_token, :current_user, :api_client, :user_data
 
       def extract_jwt_data
         @user_data = JWT.decode(
           jwt_token,
-          Rails.application.secrets.ej_jwt_secret,
+          Rails.application.secrets.ej[:jwt_secret],
           true,
           { algorithm: 'HS256' }
         ).try(:first).try(:with_indifferent_access)
@@ -53,7 +53,7 @@ module Decidim
       end
 
       def link_user_account
-        api_client.link_user_account(user_data[:secret_id], user_data[:user_id])
+        api_client.link_user_account(user_data[:secret_id])
 
         current_user.ej_external_identifier = user_data[:user_id]
         current_user.generate_ej_password_with_external_id(user_data[:user_id])

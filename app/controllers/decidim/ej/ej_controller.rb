@@ -8,26 +8,27 @@ module Decidim
       def link_external_user
         Decidim::Ej::LinkExternalUser.call(params[:user_data] || params[:token], current_user, api_client) do
           on(:invalid) do
-            @error_message = "Link inválido ou expirado. Solicite um novo link e tente novamente."
+            flash[:alert] = "Link inválido ou expirado. Solicite um novo link e tente novamente."
           end
 
           on(:user_taken) do
             # TODO: melhorar a mensagem de erro e adiciona um fluxo pro usuário relatar problema clicando em algum
             # botão. Ao clicar no botão, devemos salvar no banco um "chamado" com os dados desse usuario para analisar
-            @error_message = "Sua conta já está vinculada a um número."
+            flash[:alert] = "Sua conta já está vinculada a um número."
           end
 
           on(:token_taken) do
             # TODO: melhorar a mensagem de erro e adiciona um fluxo pro usuário relatar problema clicando em algum
             # botão. Ao clicar no botão, devemos salvar no banco um "chamado" com os dados desse usuario para analisar
-            @error_message = "Este link já foi utilizado por alguém, ou a conta que você deseja vincular já foi vinculada a outra pessoa."
+            flash[:alert] = "Este link já foi utilizado por alguém, ou a conta que você deseja vincular já foi vinculada a outra pessoa."
+            redirect_to ej_index_path
           end
 
           on(:error) do
             # TODO: melhorar a mensagem de erro e salvar em algum lugar que esse erro aconteceu com o usuário.
             # De tal forma que seja possível identificar quais e quantos usuários estão com problemas na linkagem
             # de conta
-            @error_message = "Ocorreu um erro interno. O suporte técnico já está ciente e tentará resolver o mais rápido possível."
+            flash[:alert] = "Ocorreu um erro interno. O suporte técnico já está ciente e tentará resolver o mais rápido possível."
           end
         end
       end

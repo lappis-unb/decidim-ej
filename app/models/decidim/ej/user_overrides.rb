@@ -24,7 +24,7 @@ module Decidim
 
         def generate_ej_password_with_external_id(external_id)
           self.ej_password = Digest::SHA256.hexdigest(
-            Base64.encode64("#{external_id}#{Rails.application.secrets.ej_secret_key}")
+            Base64.encode64("#{external_id}#{Rails.application.secrets.ej[:secret_key]}")
           )
 
           update(encrypted_ej_password: encrypted_ej_password)
