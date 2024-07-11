@@ -6,15 +6,30 @@ module Decidim
       # Links a already created EJ User (maybe created in WhatsApp or Telegram) to
       # the current_user.
       def link_external_user
-        user_data = JWT.decode(params[:user_data], nil, false).first.with_indifferent_access
+        Decidim::Ej::LinkExternalUser.call(params[:user_data] || params[:token], current_user, api_client) do
+          on(:invalid) do
+            @error_message = "Link inválido ou expirado. Solicite um novo link e tente novamente."
+          end
 
-        if user_data[:exp] >= Time.current.to_i
-          api_client.link_user_account(user_data[:secret_id], user_data[:user_id])
-        else
-          @error_message = "Este link que você utilizou já expirou. Solicite um novo link e tente novamente."
+          on(:user_taken) do
+            # TODO: melhorar a mensagem de erro e adiciona um fluxo pro usuário relatar problema clicando em algum
+            # botão. Ao clicar no botão, devemos salvar no banco um "chamado" com os dados desse usuario para analisar
+            @error_message = "Sua conta já está vinculada a um número."
+          end
+
+          on(:token_taken) do
+            # TODO: melhorar a mensagem de erro e adiciona um fluxo pro usuário relatar problema clicando em algum
+            # botão. Ao clicar no botão, devemos salvar no banco um "chamado" com os dados desse usuario para analisar
+            @error_message = "Este link já foi utilizado por alguém, ou a conta que você deseja vincular já foi vinculada a outra pessoa."
+          end
+
+          on(:error) do
+            # TODO: melhorar a mensagem de erro e salvar em algum lugar que esse erro aconteceu com o usuário.
+            # De tal forma que seja possível identificar quais e quantos usuários estão com problemas na linkagem
+            # de conta
+            @error_message = "Ocorreu um erro interno. O suporte técnico já está ciente e tentará resolver o mais rápido possível."
+          end
         end
-      rescue Connector::Exceptions::UserCannotBeLinked
-        @error_message = "Sua conta não pôde ser vinculada. Mas você ainda poderá participar das enquetes por aqui."
       end
 
       def home

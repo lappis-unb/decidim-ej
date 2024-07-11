@@ -10,6 +10,10 @@ module Decidim::Ej::Connector
       '/api/v1/users/'
     end
 
+    def update_account_path(secret_id)
+      "/api/v1/users/#{secret_id}/"
+    end
+
     def conversations_path(conversation_id = nil)
       "/api/v1/conversations/#{conversation_id}"
     end
