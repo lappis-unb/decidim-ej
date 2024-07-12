@@ -50,10 +50,8 @@ module Decidim
           fire_action_request(:comment, conversation_id, content)
         end
 
-        def link_user_account(secret_id, external_id)
-          raise Exceptions::UserCannotBeLinked if user.has_ej_account?
-
-          create_user(secret_id, external_id)
+        def link_user_account(secret_id)
+          link_external_user(secret_id)
         end
 
         private
@@ -218,7 +216,7 @@ module Decidim
           return cached_token if cached_token.present?
 
           body = {
-            email: "decidim-#{user.email}",
+            email: decidim_user_email,
             password: user.ej_password
           }
 
@@ -247,7 +245,7 @@ module Decidim
 
           body = {
             name: "decidim-#{user.name}",
-            email: "decidim-#{user.email}",
+            email: decidim_user_email,
             password: user.ej_password,
             password_confirm: user.ej_password
           }.with_indifferent_access
@@ -269,6 +267,32 @@ module Decidim
           # Update the user's EJ account status if everything is ok
           user.update_column(:has_ej_account, true)
           set_cached_token(response["access_token"])
+        end
+
+        # Links external user account to Brasil Participativo user's account
+        def link_external_user(secret_id)
+          # TODO: authenticate with the external account before updating user
+
+          request_body = {
+            email: decidim_user_email
+          }
+
+          response = HTTParty.put(
+            "#{host}#{update_account_path(secret_id)}",
+            body: request_body.to_json,
+            headers: content_type_headers
+          )
+
+          unless response.success?
+            Rails.logger.error "Error while linking to external user. Response: #{response}"
+            raise Exceptions::RequestError
+          end
+
+          JSON.parse(response.body)
+        end
+
+        def decidim_user_email
+          "decidim-#{user.email}"
         end
       end
     end
