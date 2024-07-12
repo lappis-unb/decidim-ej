@@ -30,6 +30,10 @@ module Decidim
             # de conta
             flash[:alert] = "Ocorreu um erro interno. O suporte técnico já está ciente e tentará resolver o mais rápido possível."
           end
+
+          on(:ok) do
+            flash[:alert] = nil
+          end
         end
       end
 

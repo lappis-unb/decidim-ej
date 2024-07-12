@@ -30,7 +30,8 @@ module Decidim
           true,
           { algorithm: 'HS256' }
         ).try(:first).try(:with_indifferent_access)
-      rescue JWT::DecodeError, JWT::ExpiredSignature
+      rescue JWT::DecodeError, JWT::ExpiredSignature => e
+        Rails.logger.error("Error while decoding JWT token. #{e}")
         @user_data = nil
       end
 
@@ -56,7 +57,7 @@ module Decidim
         api_client.link_user_account(user_data[:secret_id])
 
         current_user.ej_external_identifier = user_data[:user_id]
-        current_user.generate_ej_password_with_external_id(user_data[:user_id])
+        current_user.generate_ej_password_with_external_id!(user_data[:user_id])
         current_user.has_ej_account = true
         current_user.save
       rescue Connector::Exceptions::RequestError
