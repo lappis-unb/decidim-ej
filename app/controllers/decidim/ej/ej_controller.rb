@@ -21,7 +21,6 @@ module Decidim
             # TODO: melhorar a mensagem de erro e adiciona um fluxo pro usuário relatar problema clicando em algum
             # botão. Ao clicar no botão, devemos salvar no banco um "chamado" com os dados desse usuario para analisar
             flash[:alert] = "Este link já foi utilizado por alguém, ou a conta que você deseja vincular já foi vinculada a outra pessoa."
-            redirect_to ej_index_path
           end
 
           on(:error) do
