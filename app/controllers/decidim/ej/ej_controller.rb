@@ -61,6 +61,10 @@ module Decidim
         @user_comments = api_client.fetch_user_comments
       end
 
+      def user_votes
+        index
+      end
+
       def post_vote
         @conversation_id = params[:id]
         api_client.post_vote(params[:choice], params[:comment_id])
