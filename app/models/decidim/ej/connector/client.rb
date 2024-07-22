@@ -274,7 +274,8 @@ module Decidim
           # TODO: authenticate with the external account before updating user
 
           request_body = {
-            email: decidim_user_email
+            email: decidim_user_email,
+            password: user.ej_password
           }
 
           response = HTTParty.put(

@@ -36,6 +36,15 @@ module Decidim
         end
       end
 
+      def unlink_user
+        current_user.ej_password = nil
+        current_user.has_ej_account = false
+        current_user.ej_external_identifier = nil
+        current_user.save!
+
+        render json: {success: true, message: 'User unlinked!'}
+      end
+
       def home
         @conversation_id = current_component.settings[:conversation_id]
         set_conversation_info
