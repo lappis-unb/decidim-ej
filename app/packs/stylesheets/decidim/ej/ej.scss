@@ -395,8 +395,8 @@ body > * {
 .ej-button:hover {
   color: white;
   background-image: linear-gradient(
-    rgba(var(--interactive-rgb-primary-btn), var(--hover)),
-    rgba(var(--interactive-rgb-primary-btn), var(--hover))
+  rgba(var(--interactive-rgb-primary-btn), var(--hover)),
+  rgba(var(--interactive-rgb-primary-btn), var(--hover))
   );
 }
 
@@ -657,7 +657,7 @@ body > * {
 .ej-home-survey-container {
   flex-direction: column;
   padding: 2rem 0;
-  background-color: var(--gray-2, #f8f8f8);
+  background-color: var(--gray-2);
 }
 
 #comment-div-form {
@@ -665,4 +665,37 @@ body > * {
   padding: 1rem;
   border-radius: 16px;
   margin-top: -20px;
+}
+
+.feedback-login-container {
+  display: flex;
+  flex-direction: row;
+  gap: 2.5rem;
+}
+.first-content-container {
+}
+
+.second-content-container {
+  display: flex;
+  justify-content: "center";
+  flex-direction: column;
+  gap: 16px;
+  h2 {
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 44.14px;
+    text-align: left;
+    color: var(--gray-80);
+    margin: 0;
+    padding: 0;
+  }
+  p {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 22.15px;
+    text-align: left;
+    color: var(--gray-80);
+    margin: 0;
+    padding: 0;
+  }
 }

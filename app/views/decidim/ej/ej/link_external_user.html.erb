@@ -1,12 +1,39 @@
 <% add_decidim_page_title("Ej") %>
 
-<div class="ej-conversation-card">
-  <% if flash.try(:[], :alert) %>
-    <h1>Algo deu errado!</h1>
-    <p><%= flash.first.last %></p>
-  <% else %>
-    <h1>Sucesso!</h1>
-    <p>Sua conta foi vinculada com sucesso! Agora você pode continuar participando das enquetes livremente.</p>
-  <% end %>
-  <%= link_to("Continuar", ej_index_path, class: "btn btn-primary") %>
+<%
+  feedback = {title: '', text: '', label_button: ''}
+%>
+
+<% if flash.try(:[], :alert) %>
+  <%
+    feedback['title'] = "Oops! Algo deu errado."
+    feedback['text'] = flash.first.last
+    feedback['label_button'] = 'Ir para a página inicial'
+  %>
+<% else %>
+  <%
+    feedback['title'] = "Concluído!"
+    feedback['text'] = "Sua conta foi vinculada com sucesso! Agora você pode continuar participando das enquetes livremente."
+    feedback['label_button'] = 'Voltar para o WhatsApp'
+  %>
+<% end %>
+
+<div class="feedback-login-container br-container-lg">
+  <div class="first-content-container">
+    <img src="#" alt="" />
+  </div>
+  <div class="second-content-container">
+    <h2><%= feedback['title'] %></h2>
+    <p><%= feedback['text'] %></p>
+
+    <% if feedback['label_button'] == 'Continuar' %>
+      <a href="https://api.whatsapp.com/send?phone=556120217216" class="br-button primary">
+        <%= feedback['label_button'] %>
+      </a>
+    <% else %>
+      <a href="/" class="br-button primary">
+        <%= feedback['label_button'] %>
+      </a>
+    <% end %>
+  </div>
 </div>
