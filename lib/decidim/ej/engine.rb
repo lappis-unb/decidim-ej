@@ -12,8 +12,10 @@ module Decidim
       routes do
         # Add engine routes here
         get "user_comments", to: "ej#user_comments", as: :user_comments
+        get "user_votes", to: "ej#user_votes", as: :user_votes
 
         get 'link_external_user', controller: 'ej'
+        get 'unlink_user', controller: 'ej'
 
         root to: "ej#home"
 
