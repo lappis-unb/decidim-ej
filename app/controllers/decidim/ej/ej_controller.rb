@@ -42,7 +42,7 @@ module Decidim
         current_user.ej_external_identifier = nil
         current_user.save!
 
-        render json: {success: true, message: 'User unlinked!'}
+        render json: { success: true, message: 'User unlinked!' }
       end
 
       def home
@@ -68,6 +68,12 @@ module Decidim
 
       def user_comments
         @user_comments = api_client.fetch_user_comments
+
+        @comments_status_map = {
+          approved: "Aprovado",
+          rejected: "Rejeitado",
+          pending: "Aguardando moderação"
+        }
       end
 
       def user_votes

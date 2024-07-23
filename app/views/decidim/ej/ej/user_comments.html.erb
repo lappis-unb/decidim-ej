@@ -2,10 +2,6 @@
 
 <div>
   <% @user_comments.each do |comment| %>
-    <div>
-      <%= link_to comment['links']['self'] do %>
-        <h1><%= comment['content'] %></h1>
-      <% end %>
-    </div>
+    <%= render partial: "comment", locals: { comment: comment } %>
   <% end %>
 </div>

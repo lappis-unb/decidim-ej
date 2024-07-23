@@ -1,0 +1,21 @@
+<div class="comment-container">
+    <div class="comment-status-tag comment-<%= comment['status']%>">
+    <p>
+        <%= @comments_status_map[comment['status'].to_sym] %>
+    </p>
+    </div>
+    <div class="comment-content">
+    <div class="comment-title">
+        <%= comment['content'] %>
+    </div>
+
+    <div class="comment-subtitle">
+        Enquete:
+    </div>
+
+    </div>
+
+    <div class="comment-info">
+    Comentário criado no dia <%= DateTime.parse(comment['created']).strftime('%d/%m/%Y') %> às <%= DateTime.parse(comment['created']).strftime('%H:%M:%S') %>
+    </div>
+</div>
