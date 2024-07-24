@@ -1,0 +1,35 @@
+.search-container {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    padding: 40px 0 0 0;
+
+    .search-input {
+        width: 100%;
+        background: #F8F8F8;
+        border: 0;
+        border-radius: 8px;
+        padding: 20px 24px 16px 24px;
+    }
+
+    .search-status {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+
+        .search-status-text {
+            margin-bottom: 0;
+            font-weight: 700;
+            font-size: 16px;
+            color: #555555;
+        }
+
+        .search-status-filters {
+            display: flex;
+
+            div:first-child label {
+                font-weight: 600;
+            }
+        }
+    }
+}

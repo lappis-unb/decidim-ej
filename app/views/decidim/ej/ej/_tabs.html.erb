@@ -15,6 +15,7 @@
 
 
 <% if @selected_tab_index == "0" %>
+    <p class="conversation-quantity"><%= @conversations.length %> enquetes encontradas</p>
     <div class="conversation-card-grid">
         <% @conversations.each do |conversation| %>
         <%= render partial: 'conversation_card', locals: { conversation: conversation } %>
@@ -23,6 +24,8 @@
 <% end %>
 
 <% if @selected_tab_index == "1" %>
+    <%= render partial: "search" %>
+    <p class="conversation-quantity"><%= @user_comments.length %> comentários encontrados</p>
     <div class="comments-list">
         <% @user_comments[0..10].each do |comment| %>
             <%= render partial: "comment", locals: { comment: comment } %>

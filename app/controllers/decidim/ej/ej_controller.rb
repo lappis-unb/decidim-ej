@@ -51,10 +51,11 @@ module Decidim
       end
 
       def index
+        @selected_tab_index = params[:selected_tab_index] || "0"
+
         @conversations = api_client.fetch_conversations
         @user_comments = api_client.fetch_user_comments
 
-        @selected_tab_index = params[:selected_tab_index] || 0
         @comments_status_map = {
           approved: "Aprovado",
           rejected: "Rejeitado",
