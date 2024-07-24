@@ -1,7 +1,0 @@
-<% add_decidim_page_title("Meus comentários") %>
-
-<div>
-  <% @user_comments.each do |comment| %>
-    <%= render partial: "comment", locals: { comment: comment } %>
-  <% end %>
-</div>

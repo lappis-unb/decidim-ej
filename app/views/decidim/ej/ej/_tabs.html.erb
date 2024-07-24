@@ -1,0 +1,31 @@
+
+<div class="tabs-container">
+    <%= link_to "surveys?selected_tab_index=0" do %>
+        <div class="<%= @selected_tab_index == "0" ? "selected" : "" %>">
+            Lista de enquetes
+        </div>
+    <% end %>
+
+    <%= link_to "surveys?selected_tab_index=1" do %>
+        <div class="<%= @selected_tab_index == "1" ? "selected" : "" %>">
+            Meus comentários
+        </div>
+    <% end %>
+</div>
+
+
+<% if @selected_tab_index == "0" %>
+    <div class="conversation-card-grid">
+        <% @conversations.each do |conversation| %>
+        <%= render partial: 'conversation_card', locals: { conversation: conversation } %>
+        <% end %>
+    </div>
+<% end %>
+
+<% if @selected_tab_index == "1" %>
+    <div class="comments-list">
+        <% @user_comments[0..10].each do |comment| %>
+            <%= render partial: "comment", locals: { comment: comment } %>
+        <% end %>
+    </div>
+<% end %>

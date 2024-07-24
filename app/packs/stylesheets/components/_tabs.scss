@@ -1,0 +1,21 @@
+.tabs-container {
+    width: 100%;
+    display: flex;
+    margin-bottom: 16px;
+
+    border-bottom: 1px solid #CCCCCC;
+
+    >a {
+        >div {
+            padding: 16px 24px;
+            font-size: 20px;
+            font-weight: 500;
+            color: #555555;
+        }
+
+        .selected {
+            border-bottom: 4px solid;
+            border-color: #0C326F;
+        }
+    }
+}
