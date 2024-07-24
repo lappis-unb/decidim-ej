@@ -15,6 +15,7 @@
 
 
 <% if @selected_tab_index == "0" %>
+    <%= render partial: "search", locals: { placeholder: "Qual enquete você procura?" }%>
     <p class="conversation-quantity"><%= @conversations.length %> enquetes encontradas</p>
     <div class="conversation-card-grid">
         <% @conversations.each do |conversation| %>
@@ -24,7 +25,17 @@
 <% end %>
 
 <% if @selected_tab_index == "1" %>
-    <%= render partial: "search" %>
+    <%= render partial: "search", locals: { placeholder: "Buscar por trecho do comentário" }%>
+    <div class="search-status">
+        <p class="search-status-text">Status</p>
+
+        <div class="search-status-filters">
+            <%= render partial: "checkbox", locals: { name: "todos", label: "Todos" }%>
+            <%= render partial: "checkbox", locals: { name: "approved", label: "Aprovados" }%>
+            <%= render partial: "checkbox", locals: { name: "rejected", label: "Rejeitados" }%>
+            <%= render partial: "checkbox", locals: { name: "pending", label: "Aguardando moderação" }%>
+        </div>
+    </div>
     <p class="conversation-quantity"><%= @user_comments.length %> comentários encontrados</p>
     <div class="comments-list">
         <% @user_comments[0..10].each do |comment| %>

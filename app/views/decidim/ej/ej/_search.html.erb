@@ -1,14 +1,6 @@
 <div class="search-container">
-    <input class="search-input" placeholder="Buscar por trecho do comentário">
-
-    <div class="search-status">
-        <p class="search-status-text">Status</p>
-
-        <div class="search-status-filters">
-            <%= render partial: "checkbox", locals: { name: "todos", label: "Todos" }%>
-            <%= render partial: "checkbox", locals: { name: "approved", label: "Aprovados" }%>
-            <%= render partial: "checkbox", locals: { name: "rejected", label: "Rejeitados" }%>
-            <%= render partial: "checkbox", locals: { name: "pending", label: "Aguardando moderação" }%>
-        </div>
+    <div class="search-input-wrapper">
+        <input class="search-input" placeholder="<%= placeholder %>">
+        <i class="fas fa-search search-icon"></i>
     </div>
 </div>
