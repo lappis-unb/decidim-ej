@@ -58,7 +58,6 @@ module Decidim
         @query = params[:query]
         @conversations = if @query.present?
                            api_client.fetch_conversations.select do |conversation|
-                             puts(conversation["title"].downcase)
                              conversation["title"].downcase.include?(@query.downcase)
                            end
                          else
