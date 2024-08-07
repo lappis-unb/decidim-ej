@@ -671,6 +671,7 @@ body>* {
 .feedback-login-container {
   display: flex;
   flex-direction: row;
+  justify-content: center;
   gap: 2.5rem;
 }
 
@@ -678,9 +679,11 @@ body>* {
 
 .second-content-container {
   display: flex;
-  justify-content: "center";
+  justify-content: center;
   flex-direction: column;
   gap: 16px;
+  max-width: 461px;
+  padding: 18px;
 
   h2 {
     font-size: 32px;
@@ -700,5 +703,9 @@ body>* {
     color: var(--gray-80);
     margin: 0;
     padding: 0;
+  }
+
+  a {
+    margin-top: 40px;
   }
 }

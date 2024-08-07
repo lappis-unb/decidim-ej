@@ -6,6 +6,8 @@ module Decidim
       # Links a already created EJ User (maybe created in WhatsApp or Telegram) to
       # the current_user.
       def link_external_user
+        flash.clear
+
         Decidim::Ej::LinkExternalUser.call(params[:user_data] || params[:token], current_user, api_client) do
           on(:invalid) do
             flash[:alert] = "Link inválido ou expirado. Solicite um novo link e tente novamente."
@@ -31,7 +33,7 @@ module Decidim
           end
 
           on(:ok) do
-            flash[:alert] = nil
+            flash.clear
           end
         end
       end
