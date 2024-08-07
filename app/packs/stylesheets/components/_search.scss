@@ -3,26 +3,35 @@
     flex-direction: column;
     gap: 40px;
     padding: 40px 0 0 0;
+    margin-bottom: 40px;
 
     .search-input-wrapper {
         position: relative;
         width: 100%;
+        margin-bottom: 40px;
+
+        .search-button {
+            border-radius: 1000px;
+            position: absolute;
+            top: 12px;
+            right: 16px;
+            color: #1351B4;
+            line-height: 32px;
+
+            &:hover {
+                background-image: linear-gradient(rgba(var(--interactive-rgb), var(--hover)),
+                        rgba(var(--interactive-rgb), var(--hover)));
+            }
+        }
 
         .search-input {
+            height: 56px;
             width: 100%;
             background: #F8F8F8;
             border: 0;
             border-radius: 8px;
             padding: 20px 24px 16px 24px;
-        }
-
-        .search-icon {
-            position: absolute;
-            top: 50%;
-            right: 16px;
-            transform: translateY(-50%);
-            color: #1351B4;
-            line-height: 32px;
+            margin-bottom: unset;
         }
     }
 }

@@ -53,8 +53,22 @@ module Decidim
       def index
         @selected_tab_index = params[:selected_tab_index] || "0"
 
-        @conversations = api_client.fetch_conversations
+        @query = params[:query]
+        @conversations = if @query.present?
+                           api_client.fetch_conversations.select do |conversation|
+                             puts(conversation["title"].downcase)
+                             conversation["title"].downcase.include?(@query.downcase)
+                           end
+                         else
+                           api_client.fetch_conversations
+                         end
         @user_comments = api_client.fetch_user_comments
+        @categories = @conversations.map { |conversation| conversation["title"] }
+        @statuses = [
+          { name: "approved", label: "Aprovados" },
+          { name: "rejected", label: "Rejeitados" },
+          { name: "pending", label: "Aguardando moderação" }
+        ]
 
         @comments_status_map = {
           approved: "Aprovado",

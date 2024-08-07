@@ -11,6 +11,12 @@
             Meus comentários
         </div>
     <% end %>
+
+    <%= link_to "surveys?selected_tab_index=2" do %>
+        <div class="<%= @selected_tab_index == "2" ? "selected" : "" %>">
+            Meus votos
+        </div>
+    <% end %>
 </div>
 
 
@@ -26,20 +32,31 @@
 
 <% if @selected_tab_index == "1" %>
     <%= render partial: "search", locals: { placeholder: "Buscar por trecho do comentário" }%>
-    <div class="search-status">
-        <p class="search-status-text">Status</p>
-
-        <div class="search-status-filters">
-            <%= render partial: "checkbox", locals: { name: "todos", label: "Todos" }%>
-            <%= render partial: "checkbox", locals: { name: "approved", label: "Aprovados" }%>
-            <%= render partial: "checkbox", locals: { name: "rejected", label: "Rejeitados" }%>
-            <%= render partial: "checkbox", locals: { name: "pending", label: "Aguardando moderação" }%>
-        </div>
-    </div>
     <p class="conversation-quantity"><%= @user_comments.length %> comentários encontrados</p>
     <div class="comments-list">
         <% @user_comments[0..10].each do |comment| %>
             <%= render partial: "comment", locals: { comment: comment } %>
+        <% end %>
+    </div>
+<% end %>
+
+<% if @selected_tab_index == "2" %>
+    <div class="br-container-lg container-conversation">
+        <div>
+            <h2 class="container-title-header">Conversas em que participei</h2>
+        </div>
+        <% participated_conversations = @conversations.select do |conversation| %>
+            <% conversation["user_stats"]["participation_ratio"].to_f > 0 %>
+        <% end %>
+
+        <% if participated_conversations.any? %>
+            <div class="conversation-card-grid">
+            <% participated_conversations.each do |conversation| %>
+                <%= render partial: 'conversation_card', locals: { conversation: conversation } %>
+            <% end %>
+            </div>
+        <% else %>
+            <p>Você ainda não participou de nenhuma conversa.</p>
         <% end %>
     </div>
 <% end %>
