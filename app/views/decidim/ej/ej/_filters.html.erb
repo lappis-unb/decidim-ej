@@ -1,0 +1,38 @@
+<div class="filter-button-container" id="filter-btn-br">
+    <i class="fa-solid fa-sliders fa-lg"></i>
+    <span>Mostrar Filtros</span>
+</div>
+
+<div class="menu-filters" id="filters__menu__container">
+    <div class="triangle__position">
+      <div id="filters__triangle"></div>
+    </div>
+
+
+    <div class="filter-section">
+        
+    <% if @selected_tab_index == "0" %>
+        <span>TEMAS:</span>
+
+        <%= form.check_box :todos, label: "Todos" %>
+
+        <div class="filters-grid">
+            <% @categories.each do |category| %>
+                <%=  form.check_box category, label: category %>
+            <% end %>
+        </div>
+    <% end %>
+
+    <% if @selected_tab_index == "1" %>
+        <span>STATUS:</span>
+
+        <%= form.check_box :todos, label: "Todos" %>
+
+        <div class="filters-grid">
+            <% @statuses.each do |status| %>
+                <%=  form.check_box status[:name], label: status[:label] %>
+            <% end %>
+        </div>
+    <% end %>
+    </div>
+</div>

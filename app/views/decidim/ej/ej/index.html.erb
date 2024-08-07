@@ -5,9 +5,6 @@
     <p class="container-subtitle-header">Vote e comente em enquetes para ajudar a construir a opinião popular.</p>
   </div>
 
-  <%= link_to "Meus Comentários", user_comments_path, class: "button small" %>
-  <%= link_to 'Meus Votos', user_votes_path, class: 'button small' %>
-
   <% if false %>
   <div class="ej-button">
     <span class="create-proposal-text">
@@ -16,8 +13,6 @@
     </span>
   </div>
   <% end %>
-
-  <p class="conversation-quantity"><%= @conversations.length %> enquetes encontradas</p>
 
   <% if flash.try(:[], :alert) %>
     <div class="br-message warning new-proposal-error">
@@ -60,11 +55,7 @@
     </div>
   <% end %>
 
-  <div class="conversation-card-grid">
-      <% @conversations.each do |conversation| %>
-        <%= render partial: 'conversation_card', locals: { conversation: conversation } %>
-      <% end %>
-  </div>
 
+  <%= render partial: 'tabs' %>
 </div>
 

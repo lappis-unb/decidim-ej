@@ -1,0 +1,12 @@
+<div class="search-container">
+  <%= form_with url: "#", method: :get, local: true do |form| %>
+    <div class="search-input-wrapper ">
+      <%= form.search_field :query, label: "", placeholder: "Qual enquete você procura?", class: "search-input" %>
+      <button type="submit" class="search-button search-icon">
+        <i class="fas fa-search"></i>
+      </button>
+    </div>
+
+    <%= render partial: "filters", locals: { form: form } %>
+  <% end %>
+</div>

@@ -2,7 +2,7 @@
 
 @import "stylesheets/ej_application";
 
-body > * {
+body>* {
   font-family: Rawline;
 }
 
@@ -205,7 +205,7 @@ body > * {
 }
 
 .conversation-quantity {
-  margin: 16px 0;
+  margin: 0 0 40px 0;
 }
 
 @media (min-width: 740px) {
@@ -222,6 +222,7 @@ body > * {
     flex-direction: row;
     width: 100%;
   }
+
   .ej-component-container {
     align-items: flex-start;
   }
@@ -277,25 +278,25 @@ body > * {
   border-top-color: #155bcb;
   gap: 16px;
 
-  > .conversation-card-title {
+  >.conversation-card-title {
     font-size: 20px;
     font-weight: 600;
     margin-bottom: 8px;
     color: #1351b4;
   }
 
-  > .conversation-profile-info {
+  >.conversation-profile-info {
     display: flex;
     gap: 8px;
     margin-top: auto;
 
-    > img {
+    >img {
       border-radius: 100%;
       width: 20px;
       height: 20px;
     }
 
-    > p {
+    >p {
       font-size: 14px;
       font-weight: 600;
       margin-bottom: 0px;
@@ -303,12 +304,12 @@ body > * {
     }
   }
 
-  > .conversation-theme {
+  >.conversation-theme {
     padding: 4px 8px;
     margin: 8px 0px;
     background: #f8f8f8;
 
-    > p {
+    >p {
       color: #1351b4;
       margin: 0;
       font-size: 12px;
@@ -316,44 +317,44 @@ body > * {
     }
   }
 
-  > .conversation-participants {
+  >.conversation-participants {
     display: flex;
     flex-direction: column;
     align-items: center;
 
-    > p:first-child {
+    >p:first-child {
       margin-bottom: 4px;
       font-size: 20px;
       font-weight: 600;
     }
 
-    > p:last-child {
+    >p:last-child {
       font-size: 14px;
       font-weight: 400;
     }
   }
 
-  > .conversation-progress {
+  >.conversation-progress {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin: 16px 0;
 
-    > p {
+    >p {
       margin-bottom: 8px;
       color: #0c326f;
       font-size: 14px;
       font-weight: 600;
     }
 
-    > .conversation-progress-bar {
+    >.conversation-progress-bar {
       height: 10px;
       width: calc(100% + 32px);
       border-top: solid 1px;
       border-bottom: solid 1px;
       border-color: #e6e6e6;
 
-      > .percentage-bar {
+      >.percentage-bar {
         height: 100%;
         background: #155bcb;
       }
@@ -394,10 +395,8 @@ body > * {
 
 .ej-button:hover {
   color: white;
-  background-image: linear-gradient(
-  rgba(var(--interactive-rgb-primary-btn), var(--hover)),
-  rgba(var(--interactive-rgb-primary-btn), var(--hover))
-  );
+  background-image: linear-gradient(rgba(var(--interactive-rgb-primary-btn), var(--hover)),
+      rgba(var(--interactive-rgb-primary-btn), var(--hover)));
 }
 
 .home-sections-container h1,
@@ -472,9 +471,11 @@ body > * {
     max-width: 1470px;
   }
 }
+
 .current {
   border: 2px solid var(--blue-warm-vivid-70);
 }
+
 .current .stage-text,
 .step-process-card__content.current h3,
 .step-process-card__content.current i {
@@ -673,8 +674,8 @@ body > * {
   justify-content: center;
   gap: 2.5rem;
 }
-.first-content-container {
-}
+
+.first-content-container {}
 
 .second-content-container {
   display: flex;
@@ -693,6 +694,7 @@ body > * {
     margin: 0;
     padding: 0;
   }
+
   p {
     font-size: 16px;
     font-weight: 400;
@@ -702,6 +704,7 @@ body > * {
     margin: 0;
     padding: 0;
   }
+
   a {
     margin-top: 40px;
   }

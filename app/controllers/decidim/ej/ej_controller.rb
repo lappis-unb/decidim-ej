@@ -53,7 +53,30 @@ module Decidim
       end
 
       def index
-        @conversations = api_client.fetch_conversations
+        @selected_tab_index = params[:selected_tab_index] || "0"
+
+        @query = params[:query]
+        @conversations = if @query.present?
+                           api_client.fetch_conversations.select do |conversation|
+                             puts(conversation["title"].downcase)
+                             conversation["title"].downcase.include?(@query.downcase)
+                           end
+                         else
+                           api_client.fetch_conversations
+                         end
+        @user_comments = api_client.fetch_user_comments
+        @categories = @conversations.map { |conversation| conversation["title"] }
+        @statuses = [
+          { name: "approved", label: "Aprovados" },
+          { name: "rejected", label: "Rejeitados" },
+          { name: "pending", label: "Aguardando moderação" }
+        ]
+
+        @comments_status_map = {
+          approved: "Aprovado",
+          rejected: "Rejeitado",
+          pending: "Aguardando moderação"
+        }
 
         @conversations.each do |conversation|
           response_user_stats = @api_client.fetch_user_stats(conversation["id"])
@@ -66,10 +89,6 @@ module Decidim
       def show
         @conversation_id = params[:id]
         set_conversation_info
-      end
-
-      def user_comments
-        @user_comments = api_client.fetch_user_comments
       end
 
       def user_votes
