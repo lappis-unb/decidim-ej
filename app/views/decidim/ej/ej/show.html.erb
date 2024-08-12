@@ -43,4 +43,41 @@
 
 <div class="br-container-lg">
   <%= render partial: "component" %>
+  <span class="br-divider mb-4 mt-4" style="width: 100%"></span>
+
+  <div class="ej-conversation__general-stats">
+    <div class="ej-conversation-stats__card">
+      <i class="fa fa-users fa-2x"></i>
+      <div class="ej-conversation-stats__card-content">
+        <span class="ej-stats__number">
+          <%= @conversation['statistics']['comments']['approved'] %>
+        </span>
+        <span class="ej-stats__description">
+          pessoas estão participando desta enquete
+        </span>
+      </div>
+    </div>
+    <div class="ej-conversation-stats__card">
+      <i class="fa fa-vote-yea fa-2x"></i>
+      <div class="ej-conversation-stats__card-content">
+        <span class="ej-stats__number">
+          <%= @conversation['statistics']['votes']['total'] %>
+        </span>
+        <span class="ej-stats__description">
+          votos foram efetuados nesta enquete
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="share-ej-container mt-4">
+    <%= render partial: "decidim/shared/share_modal", locals: {
+        button_name: 'Compartilhar enquete',
+        title_name: 'Compartilhe essa enquete',
+        translation_component: '',
+        resource_name: 'resource_title(@meeting)',
+        component_name: 'resource_title(current_participatory_space)'
+      }
+    %>
+  </div>
 </div>
