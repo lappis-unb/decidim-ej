@@ -1,0 +1,7 @@
+<%= render partial: "search", locals: { placeholder: "Buscar por trecho do comentário" }%>
+<p class="conversation-quantity"><%= @user_comments.length %> comentários encontrados</p>
+<div class="comments-list">
+<% @user_comments[0..10].each do |comment| %>
+    <%= render partial: "comment", locals: { comment: comment } %>
+<% end %>
+</div>

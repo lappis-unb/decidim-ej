@@ -1,56 +1,29 @@
 
 <div class="tabs-container">
-  <%= link_to "surveys?selected_tab_index=0" do %>
-    <div class="<%= @selected_tab_index == "0" ? "selected" : "" %>">
+  <%= link_to "surveys?selected_tab=surveys" do %>
+    <div class="<%= @selected_tab == "surveys" ? "selected" : "" %>">
       Lista de enquetes
     </div>
   <% end %>
 
-  <%= link_to "surveys?selected_tab_index=1" do %>
-    <div class="<%= @selected_tab_index == "1" ? "selected" : "" %>">
+  <%= link_to "surveys?selected_tab=comments" do %>
+    <div class="<%= @selected_tab == "comments" ? "selected" : "" %>">
       Meus comentários
     </div>
   <% end %>
 
-  <%= link_to "surveys?selected_tab_index=2" do %>
-    <div class="<%= @selected_tab_index == "2" ? "selected" : "" %>">
+  <%= link_to "surveys?selected_tab=votes" do %>
+    <div class="<%= @selected_tab == "votes" ? "selected" : "" %>">
       Meus votos
     </div>
   <% end %>
 </div>
 
-
-<% if @selected_tab_index == "0" %>
-  <%= render partial: "search", locals: { placeholder: "Qual enquete você procura?" }%>
-  <p class="conversation-quantity"><%= @conversations.length %> enquetes encontradas</p>
-  <div class="conversation-card-grid">
-    <% @conversations.each do |conversation| %>
-      <%= render partial: 'conversation_card', locals: { conversation: conversation } %>
-    <% end %>
-  </div>
-<% end %>
-
-<% if @selected_tab_index == "1" %>
-  <%= render partial: "search", locals: { placeholder: "Buscar por trecho do comentário" }%>
-  <p class="conversation-quantity"><%= @user_comments.length %> comentários encontrados</p>
-  <div class="comments-list">
-    <% @user_comments[0..10].each do |comment| %>
-      <%= render partial: "comment", locals: { comment: comment } %>
-    <% end %>
-  </div>
-<% end %>
-
-<% if @selected_tab_index == "2" %>
-  <% participated_conversations = @conversations.select do |conversation| %>
-    <% conversation["user_stats"]["participation_ratio"].to_f > 0 %>
-  <% end %>
-  <% if participated_conversations.any? %>
-    <div class="conversation-card-grid" style="margin-top: 40px;">
-      <% participated_conversations.each do |conversation| %>
-        <%= render partial: 'conversation_card', locals: { conversation: conversation } %>
-      <% end %>
-    </div>
-  <% else %>
-    <p>Você ainda não participou de nenhuma conversa.</p>
-  <% end %>
+<% case @selected_tab %>
+<%when "surveys"%>
+  <%= render partial: "survey_tab"%>
+<%when "comments"%>
+  <%= render partial: "comment_tab"%>
+<%when "votes"%>
+  <%= render partial: "vote_tab"%>
 <% end %>

@@ -1,0 +1,7 @@
+<%= render partial: "search", locals: { placeholder: "Qual enquete você procura?" }%>
+<p class="conversation-quantity"><%= @conversations.length %> enquetes encontradas</p>
+<div class="conversation-card-grid">
+<% @conversations.each do |conversation| %>
+    <%= render partial: 'conversation_card', locals: { conversation: conversation } %>
+<% end %>
+</div>
