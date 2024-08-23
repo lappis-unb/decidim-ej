@@ -1,20 +1,23 @@
 .tabs-container {
     width: 100%;
     display: flex;
+    overflow-x: auto;
 
-    border-bottom: 1px solid #CCCCCC;
+    border-bottom: 1px solid var(--gray-20);
 
     >a {
+        white-space: nowrap;
+
         >div {
             padding: 16px 24px;
             font-size: 20px;
             font-weight: 500;
-            color: #555555;
+            color: var(--gray-70);
         }
 
         .selected {
             border-bottom: 4px solid;
-            border-color: #0C326F;
+            border-color: var(--blue-warm-vivid-80);
         }
     }
 }
