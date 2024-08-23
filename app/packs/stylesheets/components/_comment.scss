@@ -24,18 +24,18 @@
     }
 
     .comment-approved>p {
-        border-color: #466C04;
-        color: #466C04;
+        border-color: var(--green-vivid-60);
+        color: var(--green-vivid-60);
     }
 
     .comment-rejected>p {
-        border-color: #B50909;
-        color: #B50909;
+        border-color: var(--red-vivid-60);
+        color: var(--red-vivid-60);
     }
 
     .comment-pending>p {
-        border-color: #C05600;
-        color: #C05600;
+        border-color: var(--orange-vivid-50);
+        color: var(--orange-vivid-50);
     }
 
     .comment-content {
@@ -46,13 +46,13 @@
         .comment-title {
             font-weight: 600;
             font-size: 20px;
-            color: #1351B4;
+            color: var(--secondary);
         }
 
         .comment-subtitle {
             font-weight: 600;
             font-size: 16px;
-            color: #555555;
+            color: var(--color-secondary-07);
         }
     }
 
@@ -60,6 +60,6 @@
     .comment-info {
         font-weight: 500;
         font-size: 14px;
-        color: #555555;
+        color: var(--color-secondary-07);
     }
 }
