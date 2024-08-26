@@ -11,7 +11,7 @@
 
     <div class="filter-section">
         
-    <% if @selected_tab_index == "0" %>
+    <% if @selected_tab == "surveys" %>
         <span>TEMAS:</span>
 
         <%= form.check_box :todos, label: "Todos" %>
@@ -23,7 +23,7 @@
         </div>
     <% end %>
 
-    <% if @selected_tab_index == "1" %>
+    <% if @selected_tab == "comments" %>
         <span>STATUS:</span>
 
         <%= form.check_box :todos, label: "Todos" %>

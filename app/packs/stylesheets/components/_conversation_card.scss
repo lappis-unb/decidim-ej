@@ -12,14 +12,14 @@
     padding: 24px 16px 16px 16px;
     border-radius: 4px;
     border-top: solid 8px;
-    border-top-color: #155BCB;
+    border-top-color: var(--blue-warm-vivid-60);
     gap: 16px;
 
     >.conversation-card-title {
         font-size: 20px;
         font-weight: 600;
         margin-bottom: 8px;
-        color: #1351B4;
+        color: var(--blue-warm-vivid-70);
     }
 
     >.conversation-profile-info {
@@ -37,17 +37,17 @@
             font-size: 14px;
             font-weight: 600;
             margin-bottom: 0px;
-            color: #1351B4;
+            color: var(--blue-warm-vivid-70);
         }
     }
 
     >.conversation-theme {
         padding: 4px 8px;
         margin: 8px 0px;
-        background: #F8F8F8;
+        background: var(--gray-2);
 
         >p {
-            color: #1351B4;
+            color: var(--blue-warm-vivid-70);
             margin: 0;
             font-size: 12px;
             font-weight: 400;
@@ -79,7 +79,7 @@
 
         >p {
             margin-bottom: 8px;
-            color: #0C326F;
+            color: var(--blue-warm-vivid-80);
             font-size: 14px;
             font-weight: 600;
         }
@@ -89,11 +89,11 @@
             width: calc(100% + 32px);
             border-top: solid 1px;
             border-bottom: solid 1px;
-            border-color: #E6E6E6;
+            border-color: var(--gray-10);
 
             >.percentage-bar {
                 height: 100%;
-                background: #155BCB;
+                background: var(--blue-warm-vivid-60);
             }
         }
     }

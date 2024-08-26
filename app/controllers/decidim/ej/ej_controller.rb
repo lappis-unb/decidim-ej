@@ -53,7 +53,7 @@ module Decidim
       end
 
       def index
-        @selected_tab_index = params[:selected_tab_index] || "0"
+        @selected_tab = params[:selected_tab] || "0"
 
         @query = params[:query]
         @conversations = if @query.present?
