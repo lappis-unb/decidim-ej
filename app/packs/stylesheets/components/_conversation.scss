@@ -82,7 +82,7 @@
 
 .ej-conversation-header {
     &__title {
-        color: var(--gray-90, var(--gray-90));
+        color: var(--gray-90);
         font-size: 2rem;
         font-style: normal;
         font-weight: 600;
@@ -90,7 +90,7 @@
     }
 
     &__subtitle {
-        color: var(--gray-60, var(--gray-60));
+        color: var(--gray-60);
         font-variant-numeric: lining-nums proportional-nums;
         font-size: 1.26rem;
         font-style: normal;
@@ -117,7 +117,7 @@
     width: 100%;
 
     i {
-        color: var(--blue-warm-vivid-70, var(--blue-warm-vivid-70));
+        color: var(--blue-warm-vivid-70);
         margin-top: 6px;
     }
 }
@@ -128,7 +128,7 @@
 }
 
 .ej-conversation-card__comments {
-    color: var(--gray-60, var(--gray-60));
+    color: var(--gray-60);
     font-variant-numeric: lining-nums proportional-nums;
     font-family: Rawline;
     font-size: 18px;
